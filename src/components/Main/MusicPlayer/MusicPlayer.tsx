@@ -30,18 +30,19 @@ const MusicPlayer = () => {
   return <>
     <div className={classes["playControls"]}>
       <div className={classes["music-container"]}>
-        <DisplayInfo song={currentSong} />
-        <ProgressBar audioRef={audio} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} />
+        <DisplayInfo audioRef={audio} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} song={currentSong} />
 
         <audio ref={audio} src={currentSong.url}
           onLoadedData={handleLoadedData}
           onTimeUpdate={handleTimeUpdate} id="audio" />
-
-        <SongsNavigation audioRef={audio}
-          currentSong={currentSong}
-          currentSongIndex={currentSongIndex}
-          setCurrentSong={setCurrentSong}
-          setCurrentSongIndex={setCurrentSongIndex} />
+        <div className={classes["music-control"]}>
+          <SongsNavigation audioRef={audio}
+            currentSong={currentSong}
+            currentSongIndex={currentSongIndex}
+            setCurrentSong={setCurrentSong}
+            setCurrentSongIndex={setCurrentSongIndex} />
+          <ProgressBar audioRef={audio} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} />
+        </div>
 
         <SoundController audioRef={audio}></SoundController>
       </div>

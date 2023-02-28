@@ -11,6 +11,9 @@ const SoundController = ({ audioRef: audio, }: soundControllerProps) => {
 
     const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = +e.currentTarget.value;
+        if (isMuted && value > 0) {
+            setIsMuted(false);
+        }
         console.log("On change volume ", value);
         changeVolume(value);
     };
