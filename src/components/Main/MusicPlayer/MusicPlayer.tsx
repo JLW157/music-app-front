@@ -30,7 +30,7 @@ const MusicPlayer = () => {
   return <>
     <div className={classes["playControls"]}>
       <div className={classes["music-container"]}>
-        <DisplayInfo audioRef={audio} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} song={currentSong} />
+        <DisplayInfo song={currentSong} />
 
         <audio ref={audio} src={currentSong.url}
           onLoadedData={handleLoadedData}

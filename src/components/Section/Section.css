@@ -1,0 +1,14 @@
+.section-info{
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.section-wrapper{
+    border: 1px solid white;
+    margin: auto;
+    width: 80%;
+}
+
+.section-more{
+    color: gray;
+}
