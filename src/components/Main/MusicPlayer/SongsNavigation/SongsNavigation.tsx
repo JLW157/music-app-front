@@ -1,10 +1,14 @@
 import { faBackward, faPause, faPlay, faForward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { song, songs } from "../../../../data";
+import SectionMusicContext from "../../../../stores/sections/sectionMusicContext";
 import classes from "../MusicPlayer.module.css";
 
 const SongsNavigation = ({audioRef: audio, setCurrentSong, setCurrentSongIndex, currentSong, currentSongIndex}: songsNavigationProps) => {
+    
+    // const {songIndex, setSongIndex } = useContext(SectionMusicContext);
+
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
   
     const playPause = () => {

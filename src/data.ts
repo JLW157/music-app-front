@@ -59,13 +59,13 @@ export const songs: song[] = [
         poster: "https://upload.wikimedia.org/wikipedia/en/7/77/Post_Malone_-_Hollywood%27s_Bleeding.png",
         artists: ["Post Malone"],
         title: "Circles",
-        url: "https://mp3store.cc/get-music/post-malone-circles-djsuleimann-indamix/"
+        url: "https://mp3store.cc/download.php?file=eyJpZCI6IjQyMzYiLCJ1cmwiOiJwb3N0LW1hbG9uZS1jaXJjbGVzLWRqc3VsZWltYW5uLWluZGFtaXgiLCJ0eXBlIjoibG9hZCIsImJsb2NrIjoiMCJ9"
     },
     {
         poster: "https://mp3store.cc/uploads/cover/artist/250x250/79030867413adea98893ff6fb5dfdd28.jpg",
         artists: ["Playboi Carti"],
         title: "Lame Niggaz",
-        url: "https://mp3store.cc/get-music/playboi-carti-lame-niggaz/"
+        url: "https://mp3store.cc/download.php?file=eyJpZCI6IjM1NTQyNiIsInVybCI6InBsYXlib2ktY2FydGktbGFtZS1uaWdnYXoiLCJ0eXBlIjoibG9hZCIsImJsb2NrIjoiMCJ9"
     },
     {
         poster: "https://d32pdiva8u1wax.cloudfront.net/images/lil-uzi-vert/red-white.webp",

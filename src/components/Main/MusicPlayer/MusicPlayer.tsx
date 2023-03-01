@@ -1,19 +1,23 @@
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import classes from "./MusicPlayer.module.css";
 import { song, songs } from "../../../data";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import SoundController from "./SoundController/SoundController";
 import SongsNavigation from "./SongsNavigation/SongsNavigation";
 import DisplayInfo from "./DisplayInfo/DisplayInfo";
+import SectionMusicContext from "../../../stores/sections/sectionMusicContext";
 
 const MusicPlayer = () => {
-  // const [songsData, setSongs] = useState<song[]>(songs);
+  const { songs, songIndex, setSongIndex } = useContext(SectionMusicContext);
 
-  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
-  const [currentSong, setCurrentSong] = useState<song>(songs[currentSongIndex]);
+  const [currentSong, setCurrentSong] = useState<song>(songs[songIndex]);
+
+  useEffect(() => {
+    setCurrentSong(songs[songIndex]);
+  }, [songs, songIndex])
+
 
   const audio = useRef<HTMLAudioElement>(null);
-
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
 
@@ -38,9 +42,9 @@ const MusicPlayer = () => {
         <div className={classes["music-control"]}>
           <SongsNavigation audioRef={audio}
             currentSong={currentSong}
-            currentSongIndex={currentSongIndex}
+            currentSongIndex={songIndex}
             setCurrentSong={setCurrentSong}
-            setCurrentSongIndex={setCurrentSongIndex} />
+            setCurrentSongIndex={setSongIndex} />
           <ProgressBar audioRef={audio} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} />
         </div>
 

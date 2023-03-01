@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { song } from '../../data';
+import SectionMusicContext from '../../stores/sections/sectionMusicContext';
 import SectionItem from '../SectionItem/SectionItem';
 import "./Section.css"
 
@@ -27,9 +28,21 @@ const responsive = {
 };
 
 const Section = ({ title, songs}: sectionProps) => {
+    const context = useContext(SectionMusicContext);
     
     const onPlayClick = (songId: number) => {
         console.log(songId);
+
+        if (!context.showPlayer) {
+            console.log("Show player")
+            context.setShowPlayer(true);
+        }
+
+        if(context.songs !== songs){
+            context.setSongs(songs);
+        }
+
+        context.setSongIndex(songId);
     };
 
     let itemsToDisplay: any = songs.map((song, index) => {
