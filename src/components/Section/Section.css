@@ -4,11 +4,15 @@
     justify-content: space-between;
 }
 .section-wrapper{
-    border: 1px solid white;
+    border-bottom: 1px solid white;
     margin: auto;
     width: 80%;
 }
 
 .section-more{
     color: gray;
+}
+
+.react-multi-carousel-track{
+    padding: 20px 0px;
 }

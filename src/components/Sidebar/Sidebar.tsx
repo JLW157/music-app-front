@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBook, faHome, faPlusSquare, faHeart } from '@fortawesome/free-solid-svg-icons';
 import classes from "./Sidebar.module.css";
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     return <>
@@ -14,22 +15,22 @@ const Sidebar = () => {
             <div className={classes.navigation}>
                 <ul>
                     <li>
-                        <a href="#!">
+                        <Link to={"home"}>
                             <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
                             <span>Home</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#!">
+                        <Link to={"search"}>
                             <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                             <span>Search</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#!">
+                        <Link to={"playlists"}>
                             <FontAwesomeIcon icon={faBook}></FontAwesomeIcon>
                             <span>Your library</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -37,16 +38,16 @@ const Sidebar = () => {
             <div className={classes.navigation}>
                 <ul>
                     <li>
-                        <a href="#!">
+                        <Link to={"playlists/create"}>
                             <FontAwesomeIcon icon={faPlusSquare}></FontAwesomeIcon>
                             <span>Create Playlist</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#!">
+                        <Link to={"liked"}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                             <span>Liked songs</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

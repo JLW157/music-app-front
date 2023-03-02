@@ -7,7 +7,8 @@ const defaultValues: sectionMusicContextProps = {
     setSongIndex: ()=> {},
     songIndex: 0,
     showPlayer: false,
-    setShowPlayer: () => {}
+    setShowPlayer: () => {},
+    playMusic: () => {}, 
 }
 
 const SectionMusicContext = React.createContext<sectionMusicContextProps>(defaultValues);
@@ -20,5 +21,7 @@ export interface sectionMusicContextProps {
     showPlayer: boolean,
     setShowPlayer: (value: boolean) => void;
     setSongs: (songs: song[]) => void;
-    setSongIndex: (index: number)=> void,
+    setSongIndex: (index: number)=> void;
+    audioRef?: React.RefObject<HTMLAudioElement>;
+    playMusic: (audio: HTMLAudioElement) => void;
 }

@@ -7,6 +7,10 @@ const SectionMusicProvider = (props: playerProviderProps) => {
     const [songIndex, setSongIndex] = useState<number>(0);
     const [showPlayer, setShowPlayer] = useState<boolean>(false);
 
+    const playMusic = (audio: HTMLAudioElement) => {
+        audio.play();
+    }
+
     const playerContext: sectionMusicContextProps = {
         songs,
         songIndex,
@@ -14,6 +18,7 @@ const SectionMusicProvider = (props: playerProviderProps) => {
         setSongIndex,
         setSongs,
         setShowPlayer,
+        playMusic
     };
 
     return <>

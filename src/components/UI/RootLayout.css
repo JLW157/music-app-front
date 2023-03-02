@@ -1,0 +1,15 @@
+.grid-container {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: auto 4fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "sidebar main"
+        "player player";
+}
+
+.main-container {
+    grid-area: main;
+    overflow-y: scroll;
+  }

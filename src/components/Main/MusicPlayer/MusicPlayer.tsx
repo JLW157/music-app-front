@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import classes from "./MusicPlayer.module.css";
-import { song, songs } from "../../../data";
+import { song } from "../../../data";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import SoundController from "./SoundController/SoundController";
 import SongsNavigation from "./SongsNavigation/SongsNavigation";
@@ -16,8 +16,8 @@ const MusicPlayer = () => {
     setCurrentSong(songs[songIndex]);
   }, [songs, songIndex])
 
-
   const audio = useRef<HTMLAudioElement>(null);
+
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
 
@@ -38,7 +38,8 @@ const MusicPlayer = () => {
 
         <audio ref={audio} src={currentSong.url}
           onLoadedData={handleLoadedData}
-          onTimeUpdate={handleTimeUpdate} id="audio" />
+          onTimeUpdate={handleTimeUpdate} />
+
         <div className={classes["music-control"]}>
           <SongsNavigation audioRef={audio}
             currentSong={currentSong}

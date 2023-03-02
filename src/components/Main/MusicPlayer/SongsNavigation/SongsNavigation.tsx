@@ -1,16 +1,13 @@
 import { faBackward, faPause, faPlay, faForward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
+import {useState } from "react";
 import { song, songs } from "../../../../data";
-import SectionMusicContext from "../../../../stores/sections/sectionMusicContext";
 import classes from "../MusicPlayer.module.css";
 
 const SongsNavigation = ({audioRef: audio, setCurrentSong, setCurrentSongIndex, currentSong, currentSongIndex}: songsNavigationProps) => {
     
-    // const {songIndex, setSongIndex } = useContext(SectionMusicContext);
-
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  
+
     const playPause = () => {
         console.log("Playing clicked! ");
         if (!isPlaying) {
@@ -41,6 +38,7 @@ const SongsNavigation = ({audioRef: audio, setCurrentSong, setCurrentSongIndex, 
             if (isPlaying) {
                 setIsPlaying(false);
             }
+
             console.log("In next");
             console.log(currentSong);
             console.log(currentSongIndex);
@@ -76,7 +74,7 @@ const SongsNavigation = ({audioRef: audio, setCurrentSong, setCurrentSongIndex, 
             <button onClick={playPause} id="play" className={classes["action-btn"]}>
                 {isPlaying ? <><FontAwesomeIcon icon={faPause}></FontAwesomeIcon></> : <><FontAwesomeIcon icon={faPlay}></FontAwesomeIcon></>}
             </button>
-            <button onClick={nextSong} id="next" className="action-btn">
+            <button onClick={nextSong} id="next" className={classes["action-btn"]}>
                 <FontAwesomeIcon icon={faForward}></FontAwesomeIcon>
             </button>
         </div>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { song } from '../../data';
@@ -8,19 +8,19 @@ import "./Section.css"
 
 const responsive = {
     desktop: {
-        breakpoint: { max: 3000, min: 2400 },
+        breakpoint: { max: 3000, min: 1900 },
         items: 5,
         partialVisibilityGutter: 20, // this adds padding to the sides of the items
         slidesToSlide: 3, // number of slides to slide at once
     },
     tablet: {
-        breakpoint: { max: 2400, min: 1200 },
-        items: 3,
+        breakpoint: { max: 1900, min: 1000},
+        items: 4,
         partialVisibilityGutter: 20,
         slidesToSlide: 2,
     },
     mobile: {
-        breakpoint: { max: 1200, min: 0 },
+        breakpoint: { max: 1000, min: 0 },
         items: 2,
         partialVisibilityGutter: 20,
         slidesToSlide: 1,
@@ -29,7 +29,7 @@ const responsive = {
 
 const Section = ({ title, songs}: sectionProps) => {
     const context = useContext(SectionMusicContext);
-    
+
     const onPlayClick = (songId: number) => {
         console.log(songId);
 
@@ -41,6 +41,8 @@ const Section = ({ title, songs}: sectionProps) => {
         if(context.songs !== songs){
             context.setSongs(songs);
         }
+
+        console.log("Song id ", songId);
 
         context.setSongIndex(songId);
     };
@@ -68,7 +70,8 @@ const Section = ({ title, songs}: sectionProps) => {
 
 interface sectionProps {
     title: string;
-    songs: song[]
+    songs: song[],
+
 };
 
 export default Section;

@@ -1,10 +1,7 @@
 .playControls {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background: linear-gradient(to right, #ae2896, #509bf5);
     padding: 15px 40px;
+    grid-area: player;
 }
 
 .music-container {
