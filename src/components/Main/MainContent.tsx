@@ -1,13 +1,21 @@
-import { songs, songs2 } from "../../data";
+import { useEffect } from "react";
+import { fetchSongs } from "../../store/features/playerSlice";
+import { useAppDispatch } from "../../store/store";
 import Section from "../Section/Section";
 import Container from "../UI/Container";
 
 const MainContent = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(fetchSongs());
+    }, []);
+
     return <>
         <Container width={1990}>
-            <Section title={'Main'} songs={songs}></Section>
-            <Section title={'Newly listed'} songs={songs2}></Section>
-            <Section title={'Pop'} songs={songs2}></Section>
+            <Section title={'Main'}></Section>
+            {/* <Section title={'Newly listed'} songs={songs2}></Section> */}
+            {/* <Section title={'Pop'} songs={songs2}></Section> */}
 
             <h2>Hello world</h2>
             <div>

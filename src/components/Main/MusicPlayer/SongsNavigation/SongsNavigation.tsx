@@ -1,80 +1,51 @@
 import { faBackward, faPause, faPlay, faForward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useState } from "react";
-import { song, songs } from "../../../../data";
+import { useState } from "react";
+import { ISong } from "../../../../data";
+import { nextTrack, prevTrack, playMusic, pauseMusic } from "../../../../store/features/playerSlice";
+import { useAppDispatch, useAppSelector } from "../../../../store/store";
 import classes from "../MusicPlayer.module.css";
 
-const SongsNavigation = ({audioRef: audio, setCurrentSong, setCurrentSongIndex, currentSong, currentSongIndex}: songsNavigationProps) => {
-    
-    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+const SongsNavigation = ({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) => {
+    const dispatch = useAppDispatch();
 
-    const playPause = () => {
-        console.log("Playing clicked! ");
-        if (!isPlaying) {
-            play();
-        }
-        else {
-            pause();
-        }
-        setIsPlaying(!isPlaying);
+    const { currentSong, isPlaying, songs } = useAppSelector(state => state.player);
+
+    const handleNext = () => {
+        dispatch(nextTrack());
     };
 
-    const play = () => {
-        if (audio.current !== null) {
-            audio.current.play();
+    const handlePrevious = () => {
+        dispatch(prevTrack());
+    };
+
+    const handleTogglePlay = () => {
+        
+        console.log("in toggle play");
+
+        if (currentSong) {
+            console.log("Curreent song", currentSong);
+            if (!isPlaying) {
+                console.log("is Playing", isPlaying);
+                dispatch(playMusic(currentSong));
+                audioRef.current?.play();
+            }
+            else{
+                console.log("Pausing");
+                dispatch(pauseMusic())
+                audioRef.current?.pause();
+            }
         }
     }
-
-    const pause = () => {
-        if (audio.current !== null) {
-            audio.current.pause();
-        }
-    }
-
-    const nextSong = () => {
-        if (currentSongIndex + 1 < songs.length) {
-            setCurrentSongIndex(currentSongIndex + 1);
-            setCurrentSong(songs[currentSongIndex + 1]);
-            if (isPlaying) {
-                setIsPlaying(false);
-            }
-
-            console.log("In next");
-            console.log(currentSong);
-            console.log(currentSongIndex);
-        } else {
-            // set disabled
-            alert("There is no songs left")
-        }
-
-    };
-
-    const prevSong = () => {
-        if (currentSongIndex - 1 >= 0) {
-            setCurrentSongIndex(currentSongIndex - 1);
-            setCurrentSong(songs[currentSongIndex - 1]);
-            if (isPlaying) {
-                setIsPlaying(false);
-            }
-            console.log("In next");
-            console.log(currentSong);
-            console.log(currentSongIndex);
-        } else {
-            // set disabled
-            alert("There is no songs left")
-        }
-
-    };
-
     return <>
         <div className={classes["navigation-music"]}>
-            <button onClick={prevSong} id="prev" className={classes["action-btn"]}>
+            <button onClick={handlePrevious} id="prev" className={classes["action-btn"]}>
                 <FontAwesomeIcon icon={faBackward}></FontAwesomeIcon>
             </button>
-            <button onClick={playPause} id="play" className={classes["action-btn"]}>
+            <button onClick={handleTogglePlay} id="play" className={classes["action-btn"]}>
                 {isPlaying ? <><FontAwesomeIcon icon={faPause}></FontAwesomeIcon></> : <><FontAwesomeIcon icon={faPlay}></FontAwesomeIcon></>}
             </button>
-            <button onClick={nextSong} id="next" className={classes["action-btn"]}>
+            <button onClick={handleNext} id="next" className={classes["action-btn"]}>
                 <FontAwesomeIcon icon={faForward}></FontAwesomeIcon>
             </button>
         </div>
@@ -87,6 +58,6 @@ interface songsNavigationProps {
     audioRef: React.RefObject<HTMLAudioElement>;
     currentSongIndex: number;
     setCurrentSongIndex: (songIndex: number) => void;
-    currentSong: song;
-    setCurrentSong: (song: song) => void;
+    currentSong: ISong;
+    setCurrentSong: (song: ISong) => void;
 }

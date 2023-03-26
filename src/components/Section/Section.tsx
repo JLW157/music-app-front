@@ -1,8 +1,6 @@
-import { useContext} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { song } from '../../data';
-import SectionMusicContext from '../../stores/sections/sectionMusicContext';
+import { useAppSelector } from '../../store/store';
 import SectionItem from '../SectionItem/SectionItem';
 import "./Section.css"
 
@@ -27,32 +25,14 @@ const responsive = {
     },
 };
 
-const Section = ({ title, songs}: sectionProps) => {
-    const context = useContext(SectionMusicContext);
-
-    const onPlayClick = (songId: number) => {
-        console.log(songId);
-
-        if (!context.showPlayer) {
-            console.log("Show player")
-            context.setShowPlayer(true);
-        }
-
-        if(context.songs !== songs){
-            context.setSongs(songs);
-        }
-
-        console.log("Song id ", songId);
-
-        context.setSongIndex(songId);
-    };
+const Section = ({title}: sectionProps) => {
+    const songs = useAppSelector(state => state.player.songs);
 
     let itemsToDisplay: any = songs.map((song, index) => {
-        return <SectionItem songId={index} onPlayClick={onPlayClick} poster={song.poster} title={song.title} artitsts={song.artists} />
+        return <SectionItem key={song.id} song={song} />
     });
 
     itemsToDisplay = (itemsToDisplay ? itemsToDisplay : <div>Empty</div>);
-
 
     return <>
         <div className='section-wrapper'>
@@ -70,7 +50,7 @@ const Section = ({ title, songs}: sectionProps) => {
 
 interface sectionProps {
     title: string;
-    songs: song[],
+    // songs: ISong[],
 
 };
 

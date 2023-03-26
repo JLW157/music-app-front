@@ -2,22 +2,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "./SectionItem.css";
 import { formatArtists } from "../../utils/displayHelpers";
+import { ISong } from "../../data";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { pauseMusic, playMusic, setShowPlayer } from "../../store/features/playerSlice";
 
-const SectionItem = (props: sectionItemProps) => {
+const SectionItem = ({song}: sectionItemProps) => {
+    const {showPlayer, isPlaying, currentSong} = useAppSelector(state => state.player);
 
+    const dispatch = useAppDispatch();
+
+    function handleClick(){
+        if (!showPlayer) {
+            dispatch(setShowPlayer(true));
+        }
+        if (isPlaying) {
+            dispatch(pauseMusic());
+        }
+        else{
+            dispatch(playMusic(song));        
+        }
+    }
+    
     return <>
         <div className="card">
             <div className="card-image">
-                <img src={props.poster} alt="ima" />
+                <img src={song.posterUrl} alt="ima" />
             </div>
             <div className="card-info">
-                <h2>{props.title}</h2>
+                <h2>{song.name}</h2>
                 <div className="aritsts">
-                    {formatArtists(props.artitsts)}
+                    {formatArtists(song.artists)}
                 </div>
             </div>
-            <div className="play-icon" onClick={() => {props.onPlayClick(props.songId)}}>
+            <div className="play-icon" onClick={() => {handleClick()}}>
                 <div className="circle">
+                    {(isPlaying && currentSong?.id === song.id) && <div>P</div>}
                     <div className="triangle"></div>
                 </div>
             </div>
@@ -29,11 +48,7 @@ const SectionItem = (props: sectionItemProps) => {
 };
 
 interface sectionItemProps {
-    poster: string;
-    title: string;
-    artitsts: string[];
-    onPlayClick: (songId: number) => void;
-    songId: number
+    song: ISong;
 }
 
 export default SectionItem;
