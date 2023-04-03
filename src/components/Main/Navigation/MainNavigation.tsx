@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import classes from "./MainNavigation.module.css";
-import { Link } from 'react-router-dom';
 
 const MainNavigation = () => {
     return <>
@@ -30,7 +29,7 @@ const MainNavigation = () => {
                 <a href="#">Sign Up</a>
               </li>
             </ul>
-            <Link type="button" to={'/login'}>Log in</Link>
+            <button type="button">Log in</button>
           </div>
         </div>
     </>

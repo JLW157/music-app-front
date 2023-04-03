@@ -8,7 +8,6 @@ import Search from "../components/Search/Search";
 import SectionPage from "../components/SectionPage/SectionPage";
 import PlaylistLayout from "../components/UI/PlaylistsLayout";
 import RootLayout from "../components/UI/RootLayout";
-import Login from "../components/Auth/Login";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,7 +21,19 @@ const router = createBrowserRouter(
             </Route>
             <Route path="liked" element={<Liked />} />
             <Route path="section/:id" element={<SectionPage />}></Route>
-            <Route path="login" element={<Login />}></Route>
+
+
+
+            {/* <Route path='movie-theathers'>
+                <Route index element={<IndexMovieTheaters />} />
+                <Route path='edit/:id' element={<EditMovieTheather />} />
+                <Route path='create' element={<CreateMovieTheather />} />
+            </Route>
+            <Route path="users" element={<IndexUsers />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="profile" element={<Profile />} />
+        </Route> */}
         </Route >
     ));
 
