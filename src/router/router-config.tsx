@@ -1,5 +1,4 @@
 import { createBrowserRouter, createRoutesFromElements, Route, Navigate, RouterProvider } from "react-router-dom";
-import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Liked from "../components/Liked/Liked";
 import MainContent from "../components/Main/MainContent";
 import CreatePlaylist from "../components/Playlists/CreatePlaylist";
@@ -9,13 +8,17 @@ import SectionPage from "../components/SectionPage/SectionPage";
 import PlaylistLayout from "../components/UI/PlaylistsLayout";
 import RootLayout from "../components/UI/RootLayout";
 import Login from "../components/Auth/Login";
+import NotFoundPage from "../components/UI/NotFoundPage";
+import Authorized from "../components/Hocs/Authorized";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path='/' element={<RootLayout />} errorElement={<ErrorPage />}>
+        <Route path='/' element={<RootLayout />}>
             <Route index element={<Navigate to='home' />} />
             <Route path="home" element={<MainContent />}></Route>
-            <Route path='search' element={<Search />} />
+            <Route path='search' element={<>
+                <Authorized authorized={<Search/>}/>
+            </>} />
             <Route path='playlists' element={<PlaylistLayout />}>
                 <Route index element={<Playlists />} />
                 <Route path='create' element={<CreatePlaylist />} />
@@ -23,6 +26,7 @@ const router = createBrowserRouter(
             <Route path="liked" element={<Liked />} />
             <Route path="section/:id" element={<SectionPage />}></Route>
             <Route path="login" element={<Login />}></Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
         </Route >
     ));
 

@@ -1,14 +1,22 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IAuthenticatedUserResponse, IGoogleRequest, ILoginRequest, IRegisterRequest } from "../../models/auth.models";
+import { IAuthenticatedUserResponse, IGoogleRequest, ILoginRequest, IRegisterRequest, IRole } from "../../models/auth.models";
 import axios from "axios";
 import { googleUrl, loginUrl, registerUrl } from "../../utils/enpoints";
 import authService from "../../services/auth-service";
+import { useAppDispatch } from "../store";
+import exp from "constants";
+
+export interface IUserInfo{
+    roles: IRole[],
+    email: string;
+}
 
 export interface IAuthSliceState {
     isLoggedIn: boolean;
     loading: boolean;
     user: IAuthenticatedUserResponse | null,
     error: string | undefined;
+    userInfo: IUserInfo | null;
 };
 
 const user = JSON.parse(localStorage.getItem("user")!) as IAuthenticatedUserResponse;
@@ -17,8 +25,9 @@ const initialState: IAuthSliceState = user ? {
     isLoggedIn: true,
     user: user,
     error: undefined,
-    loading: false
-} : { isLoggedIn: false, user: null, error: undefined, loading: false };
+    loading: false,
+    userInfo: null,
+} : { isLoggedIn: false, user: null, error: undefined, loading: false, userInfo: null};
 
 
 export const login = createAsyncThunk<IAuthenticatedUserResponse, ILoginRequest, { rejectValue: string }>(
@@ -66,9 +75,50 @@ const authSlice = createSlice({
             authService.logout();
             state.isLoggedIn = false;
             state.user = null;
+            state.userInfo = null;
         },
         setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
             state.isLoggedIn = action.payload;
+        },
+        handleAuth: (state) => {
+            console.log("Handling token");
+            // check tokens exists local storage
+            const token = authService.getToken()
+            const expiration = authService.getExpirtion();
+            if (token && expiration) {
+                
+                // handle expiration
+                const expired = authService.handleExpiration(token, expiration);
+
+                // token expired
+                if (expired) {
+                    authService.logout();
+                    state.isLoggedIn = false;
+                    state.user = null;
+                    state.userInfo = null;
+                    return;      
+                }
+
+                const response = authService.getInfoFromJwt(token);
+                
+                if (!state.isLoggedIn) {
+                    state.isLoggedIn = true;
+                }
+
+                state.userInfo = response;
+            }
+            else{
+                if (state.isLoggedIn) {
+                    // logout user is there is no token
+                    authService.logout();
+                    state.isLoggedIn = false;
+                    state.user = null;
+                    state.userInfo = null;
+                    return;
+                }
+            }
+
+
         }
     },
     extraReducers: (builder) => {
@@ -107,6 +157,6 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout, setIsLoggedIn } = authSlice.actions;
+export const { logout, setIsLoggedIn, handleAuth } = authSlice.actions;
 
 export default authSlice.reducer;

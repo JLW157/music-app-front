@@ -19,7 +19,7 @@ export interface IAuthenticatedUserResponse{
 };
 
 export interface IUser{
-    roles: string[];
+    roles: IRole[];
     email: string;
     userName: string;
 };
@@ -28,3 +28,7 @@ export interface IClaim{
     name: string;
     value: string;
 }
+
+export interface IRole{
+    role: "Admin" | "User" | "Artist";
+};

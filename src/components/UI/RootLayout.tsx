@@ -8,7 +8,7 @@ import "./RootLayout.css"
 
 const RootLayout = () => {
     const showPlayer = useAppSelector(state => state.player.showPlayer);
-    console.log("SHOW PLAYER", showPlayer)
+    
     return <>
         <div className="grid-container">
             <Sidebar />

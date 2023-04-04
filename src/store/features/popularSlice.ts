@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { access, stat } from "fs";
 import { ISong } from "../../data";
 import { popularAudioUrl } from "../../utils/enpoints";
 

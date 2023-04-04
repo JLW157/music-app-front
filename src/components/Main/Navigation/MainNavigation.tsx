@@ -3,9 +3,10 @@ import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons
 import classes from "./MainNavigation.module.css";
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { logout } from '../../../store/features/authSlice';
+import { Link } from 'react-router-dom';
 
 const MainNavigation = () => {
-  const { isLoggedIn } = useAppSelector(state => state.auth);
+  const { isLoggedIn, userInfo } = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   return <>
     <div className={classes.topbar}>
@@ -22,18 +23,18 @@ const MainNavigation = () => {
         {isLoggedIn 
         ? <>
           <ul>
-            <li>Hello, User</li>
+            <li>Hello, {userInfo?.email ? userInfo.email : "User"}</li>
           </ul>
-          <button type='button' onClick={() => dispatch(logout())}></button>
+          <button type='button' onClick={() => dispatch(logout())}>Logout</button>
         </>
           : <>
             <ul>
               <li>
-                <a href="#">Sign Up</a>
+                <Link to="register">Sign Up</Link>
               </li>
               <li className="divider">|</li>
             </ul>
-            <button type="button">Log in</button>
+            <Link className={classes["auth-button"]} to={"/login"}>Log in</Link>
           </>
         }
       </div>
