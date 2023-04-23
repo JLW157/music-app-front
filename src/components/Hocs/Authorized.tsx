@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IRole } from "../../models/auth.models";
+import { IRole } from "../../models/auth-models";
 import { useAppSelector } from "../../store/store";
 import { Navigate } from "react-router-dom";
 

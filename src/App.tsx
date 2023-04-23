@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import MyRouter from './router/router-config';
 import { useAppDispatch, useAppSelector } from './store/store';
-import authService from './services/auth-service';
-import { handleAuth, logout, setIsLoggedIn } from './store/features/authSlice';
+import { handleAuth } from './store/features/authSlice';
+import { configureAuthHeaders } from './services/auth-header';
 
 function App() {
-  const auth = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
-
-  // todo fix issue with re-rendering and persistion token in localstorage
+  
   useEffect(() => {
+    console.log("App re-render");
     dispatch(handleAuth());
+    configureAuthHeaders()
   }, [dispatch]);
 
   return (

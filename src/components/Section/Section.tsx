@@ -12,7 +12,7 @@ const responsive = {
         slidesToSlide: 3, // number of slides to slide at once
     },
     tablet: {
-        breakpoint: { max: 1900, min: 1000},
+        breakpoint: { max: 1900, min: 1000 },
         items: 4,
         partialVisibilityGutter: 20,
         slidesToSlide: 2,
@@ -25,14 +25,12 @@ const responsive = {
     },
 };
 
-const Section = ({title}: sectionProps) => {
+const Section = ({ title }: sectionProps) => {
     const songs = useAppSelector(state => state.player.songs);
 
-    let itemsToDisplay: any = songs.map((song, index) => {
+    let itemsToDisplay: any = songs?.map((song, index) => {
         return <SectionItem key={song.id} song={song} />
     });
-
-    itemsToDisplay = (itemsToDisplay ? itemsToDisplay : <div>Empty</div>);
 
     return <>
         <div className='section-wrapper'>
@@ -41,9 +39,12 @@ const Section = ({title}: sectionProps) => {
                 <a href='#!' className='section-more'><span>Show All</span></a>
             </div>
 
-            <Carousel containerClass='react-multi-carousel-list' centerMode={true} responsive={responsive}>
+            {itemsToDisplay ? <Carousel containerClass='react-multi-carousel-list' centerMode={true} responsive={responsive}>
                 {itemsToDisplay && itemsToDisplay}
-            </Carousel>
+            </Carousel> : <div style={{textAlign: "center", padding: "10px"}}>
+                    There is no audios to display.
+                </div>}
+            
         </div>
     </>
 };

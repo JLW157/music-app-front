@@ -1,7 +1,5 @@
-import { SemanticClassificationFormat } from "typescript";
 import { IAuthenticatedUserResponse, IClaim } from "../models/auth.models";
-import { IAuthSliceState, IUserInfo, setIsLoggedIn } from "../store/features/authSlice";
-import { useAppDispatch } from "../store/store";
+import { IUserInfo} from "../store/features/authSlice";
 import { ClaimConstants } from "../utils/constants/claims";
 
 const tokenKey = "token";

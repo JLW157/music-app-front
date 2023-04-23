@@ -1,37 +1,50 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBook, faHome, faPlusSquare, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBook, faHome, faPlusSquare, faHeart, faBars } from '@fortawesome/free-solid-svg-icons';
 import classes from "./Sidebar.module.css";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Sidebar = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(true);
+    const toggle = () => setIsOpen(!isOpen);
+
+    const menuItems = [
+        {
+            to: "home",
+            icon: faHome,
+            name: "Home"
+        },
+        {
+            to: "search",
+            icon: faSearch,
+            name: "Search"
+        },
+        {
+            to: "playlists",
+            icon: faBook,
+            name: "Your library"
+        },
+    ];
+
     return <>
-        <div className={classes.sidebar}>
-            <div className={classes.logo}>
-                <a href='#!'>
-                    Music App
-                </a>
+        <div style={{ width: isOpen ? "200px" : "50px", alignItems: isOpen ? "flex-start" : "center" }} className={classes.sidebar}>
+            <div className={classes["top-section"]}>
+                <a style={{ display: isOpen ? "block" : "none" }} className={classes.logo}>Amigo</a>
+                <div style={{ marginLeft: isOpen ? "70px" : "0px" }} className={classes["bars"]}>
+                    <FontAwesomeIcon onClick={toggle} icon={faBars} />
+                </div>
             </div>
 
             <div className={classes.navigation}>
                 <ul>
-                    <li>
-                        <Link to={"home"}>
-                            <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
-                            <span>Home</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={"search"}>
-                            <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-                            <span>Search</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={"playlists"}>
-                            <FontAwesomeIcon icon={faBook}></FontAwesomeIcon>
-                            <span>Your library</span>
-                        </Link>
-                    </li>
+                    {menuItems.map((s, index) => {
+                        return <li key={index}>
+                            <Link to={s.to}>
+                                <FontAwesomeIcon icon={s.icon}></FontAwesomeIcon>
+                                <span style={{ display: isOpen ? "inline-block" : "none" }}>{s.name}</span>
+                            </Link>
+                        </li>
+                    })}
                 </ul>
             </div>
 
@@ -40,13 +53,13 @@ const Sidebar = () => {
                     <li>
                         <Link to={"playlists/create"}>
                             <FontAwesomeIcon icon={faPlusSquare}></FontAwesomeIcon>
-                            <span>Create Playlist</span>
+                            <span style={{ display: isOpen ? "inline-block" : "none" }}>Create Playlist</span>
                         </Link>
                     </li>
                     <li>
                         <Link to={"liked"}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                            <span>Liked songs</span>
+                            <span style={{ display: isOpen ? "inline-block" : "none" }}>Liked songs</span>
                         </Link>
                     </li>
                 </ul>

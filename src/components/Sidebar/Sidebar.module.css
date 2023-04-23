@@ -3,9 +3,17 @@
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 2rem;
   position: relative;
+  transition: all 0.3s;
+}
+
+.top-section {
+  display: flex;
+}
+
+.bars {
+  cursor: pointer;
 }
 
 .sidebar .logo img {
@@ -26,6 +34,10 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 13px;
+}
+
+.sidebar .navigation ul li span {
+  margin-left: 1em;
 }
 
 .sidebar .navigation ul li a:hover,

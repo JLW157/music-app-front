@@ -2,7 +2,7 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ISong } from "../../data";
-import { audiosUrl } from "../../utils/enpoints";
+import { audiosUrl } from "../../utils/endpoints";
 
 export interface IPlayerState {
     isPlaying: boolean;
