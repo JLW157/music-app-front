@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IAuthenticatedUserResponse, IGoogleRequest, ILoginRequest, IRegisterRequest, IRole } from "../../models/auth.models";
 import axios from "axios";
-import { googleUrl, loginUrl, registerUrl } from "../../utils/endpoints";
+import { confirmEmailUrl, googleUrl, loginUrl, registerUrl } from "../../utils/endpoints";
 import authService from "../../services/auth-service";
 
 export interface IUserInfo {
@@ -13,8 +13,6 @@ export interface IAuthSliceState {
     isLoggedIn: boolean;
     loading: boolean;
     user: IAuthenticatedUserResponse | null,
-    errors: string[] | undefined;
-    modelErrors: IModelErrors[] | undefined;
     userInfo: IUserInfo | null;
 };
 
@@ -28,12 +26,22 @@ const user = JSON.parse(localStorage.getItem("user")!) as IAuthenticatedUserResp
 const initialState: IAuthSliceState = user ? {
     isLoggedIn: true,
     user: user,
-    errors: undefined,
-    modelErrors: undefined,
     loading: false,
     userInfo: null,
-} : { isLoggedIn: false, user: null, errors: undefined, loading: false, userInfo: null, modelErrors: undefined };
+} : { isLoggedIn: false, user: null, loading: false, userInfo: null };
 
+
+export const confirmEmailAsync = createAsyncThunk<string, { token: string, email: string }, { rejectValue: string }>(
+    "auth/confirmEmailAsync",
+    async (creds, thunkAPI) => {
+        try {
+            const response = await axios.get(`${confirmEmailUrl}?token=${creds.token}&email=${creds.email}`);
+            return response.data;
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
 
 export const loginAsync = createAsyncThunk<IAuthenticatedUserResponse, ILoginRequest, { rejectValue: string[] }>(
     "auth/loginAsync",
@@ -62,7 +70,7 @@ export const registerAsync = createAsyncThunk<string, IRegisterRequest, { reject
     }
 );
 
-export const google = createAsyncThunk<IAuthenticatedUserResponse, IGoogleRequest, { rejectValue: string[]}>(
+export const google = createAsyncThunk<IAuthenticatedUserResponse, IGoogleRequest, { rejectValue: string[] }>(
     "auth/google",
     async (googleRequest, thunkAPI) => {
         try {
@@ -128,9 +136,6 @@ const authSlice = createSlice({
 
 
         },
-        clearErrors: (state) => {
-            state.errors = undefined
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(loginAsync.pending, (state, action) => {
@@ -140,7 +145,6 @@ const authSlice = createSlice({
             if (action.payload.token) {
                 state.loading = false;
                 state.isLoggedIn = true;
-                state.errors = undefined;
                 state.user = action.payload;
                 authService.setToken(action.payload);
                 state.userInfo = authService.getInfoFromJwt(action.payload.token);
@@ -148,7 +152,6 @@ const authSlice = createSlice({
         }).addCase(loginAsync.rejected, (state, action) => {
             console.log("REJECTED");
             if (action?.payload) {
-                state.errors = action.payload;
             }
 
             state.loading = false;
@@ -156,11 +159,9 @@ const authSlice = createSlice({
             state.loading = true;
         }).addCase(registerAsync.fulfilled, (state, action) => {
             state.loading = false;
-            state.errors = undefined;
 
         }).addCase(registerAsync.rejected, (state, action) => {
             if (action?.payload) {
-                state.errors = action.payload;
             }
             state.loading = false;
         })
@@ -170,20 +171,27 @@ const authSlice = createSlice({
             .addCase(google.fulfilled, (state, action) => {
                 console.log("Success login! ", action.payload);
                 state.isLoggedIn = true;
-                state.errors = undefined;
                 state.loading = false;
                 authService.setToken(action.payload);
                 state.userInfo = authService.getInfoFromJwt(action.payload.token);
             })
             .addCase(google.rejected, (state, action) => {
                 if (action?.payload) {
-                    state.errors = action.payload;
                 }
+                state.loading = false;
+            })
+            .addCase(confirmEmailAsync.fulfilled, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(confirmEmailAsync.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(confirmEmailAsync.rejected, (state, action) => {
                 state.loading = false;
             });
     }
 });
 
-export const { logout, setIsLoggedIn, handleAuth, clearErrors } = authSlice.actions;
+export const { logout, setIsLoggedIn, handleAuth } = authSlice.actions;
 
 export default authSlice.reducer;

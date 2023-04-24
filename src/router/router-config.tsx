@@ -10,12 +10,14 @@ import RootLayout from "../components/UI/RootLayout";
 import Login from "../components/Auth/Login";
 import NotFoundPage from "../components/UI/NotFoundPage";
 import Register from "../components/Auth/Register";
+import EmailSent from "../components/Email/EmailSent";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path='/' element={<RootLayout />}>
             <Route index element={<Navigate to='home' />} />
             <Route path="home" element={<MainContent />} />
+            <Route path="emailsent/:email" element={<EmailSent />} />
             <Route path='search' element={<Search />} />
             <Route path='playlists' element={<PlaylistLayout />}>
                 <Route index element={<Playlists />} />
@@ -23,7 +25,7 @@ const router = createBrowserRouter(
             </Route>
             <Route path="liked" element={<Liked />} />
             <Route path="section/:id" element={<SectionPage />}></Route>
-            <Route path="login" element={<Login />}></Route>
+            <Route path="login/:email?" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
             <Route path="*" element={<NotFoundPage />}></Route>
         </Route >

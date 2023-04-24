@@ -3,6 +3,7 @@ import "./Login.css";
 import { useState } from "react";
 import DisplaySuccess from "./DisplaySuccess";
 import DisplayErrors from "./DisplayErrors";
+import { useParams } from "react-router-dom";
 
 export interface ILoginFormValues {
     username: string;
@@ -11,11 +12,16 @@ export interface ILoginFormValues {
 }
 
 const Login = () => {
+    const {email} = useParams();
+
     const { register,
         handleSubmit,
         formState: { errors },
         reset } = useForm<ILoginFormValues>({
-            mode: "onSubmit"
+            mode: "onSubmit",
+            defaultValues: {
+                email: email
+            }
         });
 
 
