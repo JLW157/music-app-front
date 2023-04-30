@@ -4,6 +4,7 @@ import { registerCredentionals } from "../../models/auth-models";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/store";
 import { registerAsync } from "../../store/features/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const { register,
@@ -16,7 +17,7 @@ const Register = () => {
     const dispatch = useAppDispatch();
     const [errorsForm, setErrorsForm] = useState<string[]>([]);
     const [successMessage, setSuccessMessage] = useState<string | undefined>();
-
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<registerCredentionals> = (data) => {
         alert(`Your name ${data.username}`);
@@ -35,6 +36,7 @@ const Register = () => {
             }
         );
         reset();
+        navigate(`/emailsent/${data.email}`);
     };
 
     return <>

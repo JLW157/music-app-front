@@ -36,6 +36,7 @@ const getInfoFromJwt = (token: string | null): IUserInfo => {
     }
 
     const dataToken = JSON.parse(atob(token.split(".")[1]));
+    console.log(dataToken);
     const response: IClaim[] = [];
 
     for (const property in dataToken) {

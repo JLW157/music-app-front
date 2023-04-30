@@ -3,10 +3,12 @@ import { faSearch, faBook, faHome, faPlusSquare, faHeart, faBars } from '@fortaw
 import classes from "./Sidebar.module.css";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useAppSelector } from '../../store/store';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const toggle = () => setIsOpen(!isOpen);
+    const { isLoggedIn } = useAppSelector(x => x.auth);
 
     const menuItems = [
         {
@@ -62,6 +64,15 @@ const Sidebar = () => {
                             <span style={{ display: isOpen ? "inline-block" : "none" }}>Liked songs</span>
                         </Link>
                     </li>
+                    {isLoggedIn &&
+                        <li>
+
+                            <Link to={"tracks/upload"}>
+                                <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                                <span style={{ display: isOpen ? "inline-block" : "none" }}>Upload track</span>
+                            </Link>
+                        </li>
+                    }
                 </ul>
             </div>
 

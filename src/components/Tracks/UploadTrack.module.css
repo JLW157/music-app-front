@@ -1,0 +1,118 @@
+.form-upload {
+    display: flex;
+    padding-top: 10%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-upload-header{
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.drag-area {
+    height: 200px;
+    width: 300px;
+    border: 2px dashed #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.drag-area-icon {
+    font-size: 40px;
+}
+
+/* PROGRESS BAR */
+.progressbar {
+    width: 400px;
+    height: 10px;
+    background-color: white;
+    margin-bottom: 50px;
+}
+
+.progressbar div {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(98, 0, 255);
+}
+
+
+/* INPUT-BOX */
+.input-box {
+    position: relative;
+    width: 20em;
+    height: 3.5em;
+}
+
+.input-box input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ffffff;
+    background: transparent;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.input-box span {
+    position: absolute;
+    padding: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 300;
+    transition: 0.2s;
+    pointer-events: none;
+}
+
+.input-box input:focus~span,
+.input-box input:valid~span {
+    transform: translateX(-10px) translateY(-25px);
+    font-size: 12px;
+}
+
+/* BASIC INFO */
+
+.form-upload-basic-info{
+    display: flex;
+}
+
+.form-upload-other{
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.select-box{
+    position: relative;
+    width: 20em;
+    height: 3.5em;
+}
+
+.select-box select{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ffffff;
+    background: transparent;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.select-box option{
+    color: #000;
+}

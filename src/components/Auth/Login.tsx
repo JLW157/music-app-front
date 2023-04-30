@@ -3,16 +3,20 @@ import "./Login.css";
 import { useState } from "react";
 import DisplaySuccess from "./DisplaySuccess";
 import DisplayErrors from "./DisplayErrors";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch } from "../../store/store";
+import { loginAsync } from "../../store/features/authSlice";
 
 export interface ILoginFormValues {
-    username: string;
     email: string;
     password: string;
 }
 
 const Login = () => {
-    const {email} = useParams();
+    const { email } = useParams();
+    const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const { register,
         handleSubmit,
@@ -25,12 +29,17 @@ const Login = () => {
         });
 
 
-    const [errorsForm, setErrors] = useState<string[]>([]);
-    const [successMessage, setSuccessMessage] = useState<string | undefined>();
+    const [errorsForm, setErrorsForm] = useState<string[]>([]);
 
     const onSubmit: SubmitHandler<ILoginFormValues> = (data) => {
-        alert(`Your name ${data.username}`);
-        console.log("Your data here", data);
+        dispatch(loginAsync({ Email: data.email, Password: data.password })).unwrap().then(
+            (res) => {
+                navigate("/");
+            },
+            (err) => {
+                setErrorsForm(err);
+            }
+        );
         reset();
     };
 
@@ -45,8 +54,7 @@ const Login = () => {
                 <div className="form-wrapper">
                     <div className="form">
                         <h3 className="form-title">Member login</h3>
-                        <DisplaySuccess message={successMessage}/>
-                        <DisplayErrors erorrs={errorsForm}/>
+                        <DisplayErrors erorrs={errorsForm} />
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-control">
                                 <div className="input-box">

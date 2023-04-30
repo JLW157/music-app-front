@@ -26,6 +26,9 @@ const Authorized = (props: AuthorizedProps) => {
             }
             return <>{renderElement}</>;
         }
+        else{
+            return <>{props.authorized}</>
+        }
     }
 
     return <Navigate to={"/login"} />

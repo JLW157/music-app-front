@@ -11,6 +11,9 @@ import Login from "../components/Auth/Login";
 import NotFoundPage from "../components/UI/NotFoundPage";
 import Register from "../components/Auth/Register";
 import EmailSent from "../components/Email/EmailSent";
+import UploadTrackPage from "../components/Tracks/UploadTrack";
+import TracksLayout from "../components/Tracks/TracksLayout";
+import Authorized from "../components/Hocs/Authorized";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,6 +26,12 @@ const router = createBrowserRouter(
                 <Route index element={<Playlists />} />
                 <Route path='create' element={<CreatePlaylist />} />
             </Route>
+
+            <Route path="tracks" element={<TracksLayout />}>
+                <Route index element={<Navigate to={"/"} />}></Route>
+                <Route path="upload" element={<Authorized authorized={<UploadTrackPage />} nonAuthorized={<Navigate to={"/login"} />}></Authorized>} />
+            </Route>
+
             <Route path="liked" element={<Liked />} />
             <Route path="section/:id" element={<SectionPage />}></Route>
             <Route path="login/:email?" element={<Login />}></Route>
