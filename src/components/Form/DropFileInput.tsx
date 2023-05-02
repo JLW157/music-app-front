@@ -107,7 +107,7 @@ const DropFileInput = ({ control, name, rules, onLoaded }: DropFileInputProps) =
           </>
         )}
       </div>
-      <input type="file" accept="audio" onChange={onFileChange} />
+      <input type="file" accept="audio/mp3,audio/*;capture=microphone" onChange={onFileChange} />
     </div>
   );
 };

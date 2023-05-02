@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ISong } from "../../data";
 import { audiosUploadUrl, audiosUrl } from "../../utils/endpoints";
 import { IUploadTrackDTO } from "../../models/track-models";
@@ -26,7 +26,7 @@ export const fetchAudios = createAsyncThunk<ISong[], unknown, { rejectValue: str
     }
 );
 
-export const uploadTrack = createAsyncThunk<unknown, IUploadTrackDTO, { rejectValue: string }>(
+export const uploadTrack = createAsyncThunk<string, IUploadTrackDTO, { rejectValue: string }>(
     "audios/uploadTrack",
     async (data, thunkAPI) => {
         try {
@@ -38,9 +38,13 @@ export const uploadTrack = createAsyncThunk<unknown, IUploadTrackDTO, { rejectVa
 
             console.log("Uploaded", resposne);
 
-            return resposne;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Something went wrong!");
+            return resposne.data;
+        } catch (error: any | AxiosError) {
+            if (axios.isAxiosError(error)) {
+                console.log(error);
+                return thunkAPI.rejectWithValue(error.response?.data);
+            }
+            return thunkAPI.rejectWithValue("Something went wrong");
         }
     }
 )

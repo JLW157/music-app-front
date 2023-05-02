@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
 import classes from "./UploadTrack.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
 import DropFileInput from "../Form/DropFileInput";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../store/store";
@@ -14,6 +12,8 @@ import axios from "axios";
 import { genresAllUrl } from "../../utils/endpoints";
 import { getGenres } from "../../services/tracks-service";
 import { IGenre } from "../../models/genres-models";
+import DisplayErrors from "../Auth/DisplayErrors";
+import { useNavigate } from "react-router-dom";
 
 const UploadTrackPage = () => {
   const {
@@ -26,12 +26,14 @@ const UploadTrackPage = () => {
 
   const [selectedOptions, setSelectedOptions] = useState<string>("");
   const [genres, setGenres] = useState<IGenre[]>([]);
-
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     getGenres().then(res => {
       setGenres(res);
     });
   }, []);
+
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -40,7 +42,14 @@ const UploadTrackPage = () => {
 
   const onSubmit = (formData: IUploadTrackDTO) => {
     console.log("Submited", formData);
-    dispatch(uploadTrack(formData));
+    dispatch(uploadTrack(formData)).unwrap().then(
+      res => {
+        navigate("/");
+      },    
+      rej => {
+        setError(rej);
+      }
+    );
   };
 
   const onAudioLoaded = (title: string | null) => {
@@ -62,14 +71,17 @@ const UploadTrackPage = () => {
                 <DropFileInput
                   onLoaded={(title) => { onAudioLoaded(title) }}
                   control={control}
-                  name="file"
+                  name="track"
                   rules={{ required: "Audio file is required" }}
                 />
-                {errors.file && <p>{errors.file.message}</p>}
+                {errors.track && <p>{errors.track.message}</p>}
               </>}
             {page === 2 &&
               <>
                 <div className={classes["form-upload-basic-info"]}>
+                  {error && <>
+                    <DisplayErrors erorrs={[error]} />
+                  </>}
                   <div className={classes["form-upload-image"]}>
                     <DropImageInput
                       control={control}
@@ -87,7 +99,7 @@ const UploadTrackPage = () => {
                         required: "Genre is required!",
                       })}>
                         <option value="">Select genre</option>
-                        {genres.map((g, index) => <option key={index} value={g.genre}>{g.genre}</option>)}
+                        {genres.map((g, index) => <option key={g.id} value={g.id}>{g.genre}</option>)}
                       </select>
                     </div>
                   </div>

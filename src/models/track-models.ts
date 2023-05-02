@@ -1,6 +1,6 @@
 export interface IUploadTrackDTO{
-    file: File;
-    name: string;
+    track: File;
+    image: File;
     title:string;
     genre: string;
 }
