@@ -17,3 +17,4 @@ export const confirmEmailUrl = `${baseUrl}/api/account/ConfirmEmail`;
 
 // post
 export const verifyEmailAgainUrl = `${baseUrl}/api/account/VerifyEmail`;
+
