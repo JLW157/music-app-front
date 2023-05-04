@@ -169,11 +169,13 @@ const authSlice = createSlice({
                 state.loading = true;
             })
             .addCase(google.fulfilled, (state, action) => {
-                console.log("Success login! ", action.payload);
-                state.isLoggedIn = true;
-                state.loading = false;
-                authService.setToken(action.payload);
-                state.userInfo = authService.getInfoFromJwt(action.payload.token);
+                if (action.payload.token) {
+                    state.loading = false;
+                    state.isLoggedIn = true;
+                    state.user = action.payload;
+                    authService.setToken(action.payload);
+                    state.userInfo = authService.getInfoFromJwt(action.payload.token);
+                }
             })
             .addCase(google.rejected, (state, action) => {
                 if (action?.payload) {

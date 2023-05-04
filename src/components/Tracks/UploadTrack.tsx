@@ -23,7 +23,7 @@ const UploadTrackPage = () => {
     formState: { errors },
     setValue
   } = useForm<IUploadTrackDTO>();
-  
+
 
   const [selectedOptions, setSelectedOptions] = useState<string>("");
   const [genres, setGenres] = useState<IGenre[]>([]);
@@ -46,7 +46,7 @@ const UploadTrackPage = () => {
     dispatch(uploadTrack(formData)).unwrap().then(
       res => {
         navigate("/");
-      },    
+      },
       rej => {
         setError(rej);
       }
@@ -66,6 +66,11 @@ const UploadTrackPage = () => {
           <div className={classes["form-container"]}>
             <div className={classes["form-upload-header"]}>
               <h3>{FormTitles[page - 1]}</h3>
+              {error && <>
+                <div style={{margin: "1rem"}}>
+                  <DisplayErrors erorrs={[error]} />
+                </div>
+              </>}
             </div>
             {page === 1 &&
               <>
@@ -80,9 +85,6 @@ const UploadTrackPage = () => {
             {page === 2 &&
               <>
                 <div className={classes["form-upload-basic-info"]}>
-                  {error && <>
-                    <DisplayErrors erorrs={[error]} />
-                  </>}
                   <div className={classes["form-upload-image"]}>
                     <DropImageInput
                       control={control}

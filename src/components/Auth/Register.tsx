@@ -3,8 +3,10 @@ import "./Login.css";
 import { registerCredentionals } from "../../models/auth-models";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/store";
-import { registerAsync } from "../../store/features/authSlice";
+import { google, registerAsync } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
+import { CredentialResponse, GoogleOAuthProvider } from "@react-oauth/google";
+import Google from "./Google";
 
 const Register = () => {
     const { register,
@@ -38,6 +40,21 @@ const Register = () => {
         reset();
         navigate(`/emailsent/${data.email}`);
     };
+
+    
+    const onGoogleSubmitClick = (resposne: CredentialResponse) => {
+        dispatch(google({IdToken: resposne.credential})).unwrap().then(
+            (res) => {
+                navigate("/");
+            },
+            (err) => {
+                setErrorsForm(err);
+            }
+        );
+
+        reset();
+    }
+
 
     return <>
         <div className="form-card">
@@ -91,6 +108,12 @@ const Register = () => {
 
                             <div className="form-btns">
                                 <button className="form-btn" disabled={isSubmitting} type="submit">Register</button>
+                                <p>or sign with</p>
+                                <div className="google-btn">
+                                    <GoogleOAuthProvider clientId="146676323838-15sr4eu3nmqlhepgprq5gjmclkblpmuq.apps.googleusercontent.com">
+                                        <Google onGoogleSubmit={onGoogleSubmitClick}/>
+                                    </GoogleOAuthProvider>
+                                </div>
                             </div>
                         </form>
                     </div>

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBook, faHome, faPlusSquare, faHeart, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBook, faHome, faPlusSquare, faHeart, faBars, faUpload } from '@fortawesome/free-solid-svg-icons';
 import classes from "./Sidebar.module.css";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -68,7 +68,7 @@ const Sidebar = () => {
                         <li>
 
                             <Link to={"tracks/upload"}>
-                                <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
                                 <span style={{ display: isOpen ? "inline-block" : "none" }}>Upload track</span>
                             </Link>
                         </li>

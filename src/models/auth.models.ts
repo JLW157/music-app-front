@@ -10,7 +10,7 @@ export interface ILoginRequest{
 };
 
 export interface IGoogleRequest{
-    IdToken: string;
+    IdToken: string | undefined;
 };
 
 export interface IAuthenticatedUserResponse{

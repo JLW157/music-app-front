@@ -1,4 +1,5 @@
-const baseUrl: string = "https://localhost:7143";
+const baseUrlLocal: string = "https://localhost:7143";
+const baseUrl: string = "https://music-app-api.azurewebsites.net";
 
 export const popularAudioUrl = `${baseUrl}/api/audio/popular`;
 export const audiosUrl = `${baseUrl}/api/audio`;

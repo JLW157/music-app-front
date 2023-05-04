@@ -5,7 +5,9 @@ import DisplaySuccess from "./DisplaySuccess";
 import DisplayErrors from "./DisplayErrors";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../store/store";
-import { loginAsync } from "../../store/features/authSlice";
+import { google, handleAuth, loginAsync } from "../../store/features/authSlice";
+import Google from "./Google";
+import { CredentialResponse, GoogleOAuthProvider } from "@react-oauth/google";
 
 export interface ILoginFormValues {
     email: string;
@@ -42,6 +44,19 @@ const Login = () => {
         );
         reset();
     };
+
+    const onGoogleSubmitClick = (resposne: CredentialResponse) => {
+        dispatch(google({IdToken: resposne.credential})).unwrap().then(
+            (res) => {
+                navigate("/");
+            },
+            (err) => {
+                setErrorsForm(err);
+            }
+        );
+
+        reset();
+    }
 
     return <>
         <div className="form-card">
@@ -86,6 +101,12 @@ const Login = () => {
 
                             <div className="form-btns">
                                 <button className="form-btn" type="submit">Login</button>
+                                <p>or sign with</p>
+                                <div className="google-btn">
+                                    <GoogleOAuthProvider clientId="146676323838-15sr4eu3nmqlhepgprq5gjmclkblpmuq.apps.googleusercontent.com">
+                                        <Google onGoogleSubmit={onGoogleSubmitClick}/>
+                                    </GoogleOAuthProvider>
+                                </div>
                             </div>
                         </form>
                         <div className="form-register-link" style={{ "textAlign": "center" }}>

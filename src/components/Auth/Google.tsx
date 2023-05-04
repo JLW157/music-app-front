@@ -1,8 +1,12 @@
-import { GoogleLogin } from "@react-oauth/google";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useAppDispatch } from "../../store/store";
 import { google, handleAuth } from "../../store/features/authSlice";
 
-const Google = () => {
+interface IGoogleProps{
+    onGoogleSubmit: (resposne: CredentialResponse) => void;
+}
+
+const Google = ({onGoogleSubmit}: IGoogleProps) => {
     const dispatch = useAppDispatch();
 
     return <GoogleLogin
