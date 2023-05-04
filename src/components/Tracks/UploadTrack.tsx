@@ -23,6 +23,7 @@ const UploadTrackPage = () => {
     formState: { errors },
     setValue
   } = useForm<IUploadTrackDTO>();
+  
 
   const [selectedOptions, setSelectedOptions] = useState<string>("");
   const [genres, setGenres] = useState<IGenre[]>([]);
