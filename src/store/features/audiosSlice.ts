@@ -13,9 +13,9 @@ const initialState: IAudiosState = {
     audios: [],
 };
 
-export const fetchAudios = createAsyncThunk<ISong[], unknown, { rejectValue: string }>(
+export const fetchAudios = createAsyncThunk<ISong[], { rejectValue: string }>(
     "audios/fetchAudios",
-    async (text, thunkAPI) => {
+    async (_, thunkAPI) => {
         try {
             const response = await axios.get(audiosUrl);
 
