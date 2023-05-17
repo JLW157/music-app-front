@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "./SectionItem.css";
 import { formatArtists } from "../../utils/displayHelpers";
-import { ISong } from "../../data";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { pauseMusic, playMusic, setShowPlayer } from "../../store/features/playerSlice";
+import { ISong } from "../../models/track-models";
 
 const SectionItem = ({song}: sectionItemProps) => {
     const {showPlayer, isPlaying, currentSong} = useAppSelector(state => state.player);

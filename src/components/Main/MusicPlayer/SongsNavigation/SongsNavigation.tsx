@@ -1,10 +1,10 @@
 import { faBackward, faPause, faPlay, faForward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { ISong } from "../../../../data";
 import { nextTrack, prevTrack, playMusic, pauseMusic } from "../../../../store/features/playerSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/store";
 import classes from "../MusicPlayer.module.css";
+import { ISong } from "../../../../models/track-models";
 
 const SongsNavigation = ({ audioRef }: { audioRef: React.RefObject<HTMLAudioElement> }) => {
     const dispatch = useAppDispatch();

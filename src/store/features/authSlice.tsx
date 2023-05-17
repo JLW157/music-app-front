@@ -7,6 +7,7 @@ import authService from "../../services/auth-service";
 export interface IUserInfo {
     roles: IRole[],
     email: string;
+    username: string;
 }
 
 export interface IAuthSliceState {

@@ -7,6 +7,10 @@ export  class ClaimConstants{
         return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress";
     };
 
+    static UsernameClaim(){
+        return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+    }
+
     static ExpirationClaim(){
         return "exp";
     }

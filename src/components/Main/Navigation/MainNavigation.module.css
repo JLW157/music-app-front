@@ -1,3 +1,4 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -25,6 +26,7 @@
 .navbar {
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 
 .navbar ul {
@@ -48,8 +50,7 @@
   color: #ffffff;
 }
 
-.auth-button,
-.topbar .navbar button {
+.auth-button {
   border: none;
   background-color: #fff;
   color: #000000;
@@ -61,9 +62,8 @@
   transition: all 0.2s;
 }
 
-.auth-button:hover{
+.auth-button:hover {
   background-color: #c9c9c9;
-  
 }
 
 
@@ -72,4 +72,101 @@
   font-size: 26px;
   margin: 0px 20px;
   width: auto;
+}
+
+.user-pic {
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  transition: all 0.3s;
+  border: 2px solid #fff;
+}
+
+.user-pic.open {
+  background-color: #1b1a1a;
+}
+
+.user-pic:hover {
+  background-color: #2b2b2b;
+}
+
+.user-pic-photo {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-pic-photo::after{
+  margin-left: 5px;
+  color: #fff;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f107";
+}
+
+.user-pic-arrow {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-menu-wrap {
+  position: absolute;
+  top: 78px;
+  right: 2%;
+  min-width: 320px;
+  z-index: 1;
+  transition: all 0.2s;
+}
+
+.sub-menu {
+  border: 2px solid #fff;
+  color: #FFF;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.sub-menu hr {
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+}
+
+.sub-menu-link {
+  width: 100%;
+  background: none;
+  border: none;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 10% 90%;
+  text-decoration: none;
+  color: #b0acac;
+  padding: 10px;
+}
+
+.sub-menu-link:hover {
+  background-color: #2b2b2b;
+}
+
+.sub-menu-link > *{
+  justify-self: start;
+}
+
+.sub-menu-link p {
 }

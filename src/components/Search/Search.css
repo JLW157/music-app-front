@@ -1,0 +1,64 @@
+.search-input{
+    max-width: 600px;
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+}
+
+.search-input input{
+    flex: 1;
+    border: none;
+    outline: none;
+}
+
+.search-input button{
+    background-color: tomato;
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-input svg{
+    align-self: center;
+    padding: 10px;
+}
+.select-box{
+    position: relative;
+    width: 40%;
+    height: 100%;
+}
+
+.select-box select{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid #ffffff;
+    background: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #000;
+    font-weight: 300;
+}
+
+.select-box option{
+    color: #000;
+}
+
+.search-wrapper{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0px 10px;
+}
+
+.search-input{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

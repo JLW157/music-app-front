@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
-import { ISong } from "../../data";
 import { audiosUploadUrl, audiosUrl } from "../../utils/endpoints";
-import { IUploadTrackDTO } from "../../models/track-models";
+import { ISong, IUploadTrackDTO } from "../../models/track-models";
 
 export interface IAudiosState {
     audios: ISong[];

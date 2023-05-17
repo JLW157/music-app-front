@@ -1,5 +1,5 @@
 import { IAuthenticatedUserResponse, IClaim } from "../models/auth.models";
-import { IUserInfo} from "../store/features/authSlice";
+import { IUserInfo } from "../store/features/authSlice";
 import { ClaimConstants } from "../utils/constants/claims";
 
 const tokenKey = "token";
@@ -15,7 +15,7 @@ const getToken = () => {
 };
 
 const getExpirtion = () => {
-    return localStorage.getItem(tokenExpirationKey);   
+    return localStorage.getItem(tokenExpirationKey);
 }
 
 
@@ -28,7 +28,8 @@ const logout = () => {
 const getInfoFromJwt = (token: string | null): IUserInfo => {
     const userInfo: IUserInfo = {
         roles: [],
-        email: ''
+        email: '',
+        username: ""
     };
 
     if (!token) {
@@ -45,15 +46,17 @@ const getInfoFromJwt = (token: string | null): IUserInfo => {
         }
 
         if (property === ClaimConstants.RoleClaim()) {
-            userInfo.roles.push({role: dataToken[property]});
+            userInfo.roles.push({ role: dataToken[property] });
         }
 
+        if (property === ClaimConstants.UsernameClaim()) {
+            userInfo.username = dataToken[property]
+        };
     }
-
-    console.log("Claims", response);
 
     return userInfo;
 };
+
 
 
 const handleExpiration = (token: string | null, expiration: string | null): boolean => {

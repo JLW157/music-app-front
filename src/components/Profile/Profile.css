@@ -1,0 +1,133 @@
+.profile-page-wrapper {
+    border: 1px solid black;
+}
+.profle-page {
+    display: grid;
+    grid-template-areas: 
+    "header header header"
+    "tabs tabs tabs"
+    "main main main"
+    "main main main"
+    "main main main"
+    "main main main"
+    "main main main"
+    "main main main"
+    "main main main"
+    "main main main"
+    "main main main";
+}
+.profile-page-header {
+    grid-area: header;
+    padding: 20px;
+    background-image: linear-gradient(to right, #8360c3, #2ebf91);
+}
+.profile-page-tabs {
+    background-color: indigo;
+    grid-area: tabs;
+}
+
+.profile-page-tabs-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-page-main {
+    position: relative;
+    grid-area: main;
+}
+/* .profile-page-main-other {
+    grid-area: other;
+    background-color: azure;
+    top: 0;
+} */
+
+.songs-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .soundList__item {
+    margin-bottom: 20px;
+  }
+  
+  .sound {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sound__body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sound__artwork {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .sound__content {
+    flex: 1;
+  }
+  
+  .soundTitle__titleContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .soundTitle__playButton {
+    margin-right: 10px;
+  }
+  
+  .soundTitle__usernameTitleContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .soundTitle__additionalContainer {
+    margin-left: 10px;
+  }
+  
+  .sound__waveform {
+    margin-top: 10px;
+  }
+  
+  .commentForm {
+    margin-top: 10px;
+  }
+  
+  .sound__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .tabs-link::after{
+    content: "";
+    width: 0px;
+    height: 1px;
+    background-color: #fff;
+    margin: auto;
+    display: block;
+  }
+
+  .tabs-link:hover::after{
+    width: 100%;
+    transition: width 0.1s linear;
+  }
+
+  .tabs-link.active{
+    color: orange;
+  } 
+
+  .tabs-link.active::after{
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: orange;
+    margin: auto;
+    display: block;
+  } 
+

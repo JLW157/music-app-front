@@ -1,8 +1,7 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ISong } from "../../data";
-import { audiosUrl } from "../../utils/endpoints";
+import { audiosUrl, getUserAudiosUrl } from "../../utils/endpoints";
+import { ISong } from "../../models/track-models";
 
 export interface IPlayerState {
     isPlaying: boolean;
@@ -17,23 +16,34 @@ const initialState: IPlayerState = {
     songs: [],
     showPlayer: false,
 };
+
 export const fetchSongs = createAsyncThunk<ISong[]>(
-    "audios/fetchAudios",
-    async (text, thunkAPI) => {
+    "player/fetchSongs",
+    async (_, thunkAPI) => {
         try {
             const response = await axios.get(audiosUrl);
-            
             return response.data;
         } catch (error) {
-            thunkAPI.rejectWithValue("Something went wrong!");
+            return thunkAPI.rejectWithValue("Something went wrong!");
+        }
+    }
+);
+
+export const fetchUserSongs = createAsyncThunk<ISong[]>(
+    "player/fetchUserSongs",
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get(getUserAudiosUrl);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Something went wrong!");
         }
     }
 )
 
-
 const playerSlice = createSlice({
     name: "player",
-    initialState: initialState,
+    initialState,
     reducers: {
         playMusic: (state, action: PayloadAction<ISong>) => {
             state.currentSong = action.payload;
@@ -42,38 +52,44 @@ const playerSlice = createSlice({
         pauseMusic: (state) => {
             state.isPlaying = false;
         },
-        setSongs: (state, action: PayloadAction<ISong[]>) => {
-            state.songs = action.payload;
-        },
         setShowPlayer: (state, action: PayloadAction<boolean>) => {
             state.showPlayer = action.payload;
         },
         nextTrack: (state) => {
-            const currentIndex = state.songs.findIndex(x => x.id === state.currentSong?.id);
-            console.log("After ended");
-            if(currentIndex < state.songs.length - 1){
+            const currentIndex = state.songs.findIndex(
+                (song) => song.id === state.currentSong?.id
+            );
+            if (currentIndex < state.songs.length - 1) {
                 state.currentSong = state.songs[currentIndex + 1];
                 state.isPlaying = true;
-            }   
+            }
         },
         prevTrack: (state) => {
-            const currentIndex = state.songs.findIndex(track => track.id === state.currentSong?.id);
+            const currentIndex = state.songs.findIndex(
+                (song) => song.id === state.currentSong?.id
+            );
             if (currentIndex > 0) {
                 state.currentSong = state.songs[currentIndex - 1];
                 state.isPlaying = true;
             }
-        }  
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchSongs.fulfilled, (state, action) => {
             state.songs = action.payload;
-        })
-    }
+        }).addCase(fetchUserSongs.fulfilled, (state, action) => {
+            console.log("REsposne from user tracks ", action.payload);
+            state.songs = action.payload;
+        });
+    },
 });
 
-export const { playMusic, setShowPlayer, setSongs, prevTrack, nextTrack, pauseMusic } = playerSlice.actions
+export const {
+    playMusic,
+    pauseMusic,
+    setShowPlayer,
+    nextTrack,
+    prevTrack,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;
-
-
-

@@ -14,6 +14,10 @@ import EmailSent from "../components/Email/EmailSent";
 import UploadTrackPage from "../components/Tracks/UploadTrack";
 import TracksLayout from "../components/Tracks/TracksLayout";
 import Authorized from "../components/Hocs/Authorized";
+import Profile from "../components/Profile/Profile";
+import ProfileLayout from "../components/Profile/ProfileLayout";
+import TrackList from "../components/Tracks/TrackList";
+import UserTracks from "../components/Tracks/UserTracks";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -26,7 +30,6 @@ const router = createBrowserRouter(
                 <Route index element={<Playlists />} />
                 <Route path='create' element={<CreatePlaylist />} />
             </Route>
-
             <Route path="tracks" element={<TracksLayout />}>
                 <Route index element={<Navigate to={"/"} />}></Route>
                 <Route path="upload" element={<Authorized authorized={<UploadTrackPage />} nonAuthorized={<Navigate to={"/login"} />}></Authorized>} />
@@ -36,6 +39,20 @@ const router = createBrowserRouter(
             <Route path="section/:id" element={<SectionPage />}></Route>
             <Route path="login/:email?" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
+
+            <Route path="me" element={<Profile />}>
+                <Route index element={<h2>Test</h2>}></Route>
+                <Route path="tracks" element={<UserTracks />} />
+                <Route path="sets" element={<h2>My Sets</h2>} />
+            </Route>
+
+            {/*<Route path=":username/*" element={<UserProfile />} >
+                <Route path="sets" element={<UserSets />} />
+                <Route path="sets/:nameOfSet" element={<SetDetail />} />
+                <Route path="tracks" element={<UserTracks />} />
+                <Route path="tracks/:nameofTrack" element={<TrackDetail />} />
+            </Route>*/}
+
             <Route path="*" element={<NotFoundPage />}></Route>
         </Route >
     ));

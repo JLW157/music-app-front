@@ -1,15 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faArrowDown, faChevronLeft, faChevronRight, faPenToSquare, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import classes from "./MainNavigation.module.css";
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { logout } from '../../../store/features/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { ProfileSubMenu } from './Profile/ProfileSubmenu/ProfileSubMenu';
+import ProfileIcon from './Profile/ProfileIcon';
+import { useState } from 'react';
 
 const MainNavigation = () => {
   const { isLoggedIn, userInfo } = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   return <>
     <div className={classes.topbar}>
       <div className={classes["prev-next-buttons"]}>
@@ -25,9 +30,13 @@ const MainNavigation = () => {
         {isLoggedIn
           ? <>
             <ul>
-              <li>Hello, {userInfo?.email ? userInfo.email : "User"}</li>
+              <li>
+                <ProfileIcon isProfileOpen={isProfileOpen} profileToggler={() => setIsProfileOpen(!isProfileOpen)}/>
+              </li>
+              {isProfileOpen && <>
+                <ProfileSubMenu emailToDisplay={userInfo?.email} />
+              </>}
             </ul>
-            <button type='button' onClick={() => dispatch(logout())}>Logout</button>
           </>
           : <>
             <ul>

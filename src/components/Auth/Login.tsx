@@ -93,7 +93,7 @@ const Login = () => {
                                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$/,
                                             message: "Please enter valid password"
                                         }
-                                    })} type="text" required />
+                                    })} type="password" required />
                                     <span>Password</span>
                                 </div>
                                 {errors?.password && <div style={{ color: "red" }}>{errors.password.message}</div>}

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ISong } from "../../data";
 import { popularAudioUrl } from "../../utils/endpoints";
+import { ISong } from "../../models/track-models";
 
 export interface IPopularState{
     songs: ISong[];

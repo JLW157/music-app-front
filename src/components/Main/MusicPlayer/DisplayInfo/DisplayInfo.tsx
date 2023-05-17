@@ -1,4 +1,4 @@
-import { ISong } from "../../../../data";
+import { ISong } from "../../../../models/track-models";
 import { formatArtists } from "../../../../utils/displayHelpers";
 import classes from "../MusicPlayer.module.css";
 
