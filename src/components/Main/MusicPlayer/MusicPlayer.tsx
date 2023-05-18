@@ -1,55 +1,60 @@
-import { useRef, useState } from "react";
-import classes from "./MusicPlayer.module.css";
-import ProgressBar from "./ProgressBar/ProgressBar";
-import SoundController from "./SoundController/SoundController";
-import SongsNavigation from "./SongsNavigation/SongsNavigation";
-import DisplayInfo from "./DisplayInfo/DisplayInfo";
+// MusicPlayer.tsx
+import { useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { nextTrack } from "../../../store/features/playerSlice";
+import { pauseTrack, playCurrentTrack, playNextTrack, playPrevTrack, setTrack } from "../../../store/features/appSlice";
 
 const MusicPlayer = () => {
-  const audio = useRef<HTMLAudioElement>(null);
   const dispatch = useAppDispatch();
+  const currentTrack = useAppSelector((state) => state.app.currentTrack);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const { currentSong, isPlaying, songs } = useAppSelector(state => state.player);
+  useEffect(() => {
+    if (currentTrack?.song && audioRef.current) {
+      audioRef.current.play();
+    } else {
+      audioRef.current?.pause();
+    }
+  }, [currentTrack?.song]);
 
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const [duration, setDuration] = useState<number>(0);
+  useEffect(() => {
+    if (!currentTrack?.isPlaying) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+    }
+  }, [currentTrack?.isPlaying])
 
-  const handleLoadedData = () => {
-    setDuration(audio.current?.duration || 0);
+  const toggleButton = () => {
+    if (!currentTrack?.isPlaying) {
+      dispatch(playCurrentTrack());
+    }
+    else {
+      dispatch(pauseTrack());
+    }
   };
 
-  const handleTimeUpdate = () => {
-    console.log(audio.current?.currentTime);
-    setCurrentTime(audio.current?.currentTime || 0);
+  const handlePlayNext = () => {
+    dispatch(playNextTrack());
   };
 
-  return <>
-    <div className={classes["playControls"]}>
-      <div className={classes["music-container"]}>
-        {currentSong &&
-          <>
-            <DisplayInfo song={currentSong} />
+  const handlePlayPrev = () => {
+    dispatch(playPrevTrack());
+  };
 
-            <audio ref={audio} autoPlay={isPlaying} src={currentSong.audioUrl}
-              onLoadedData={handleLoadedData}
-              onTimeUpdate={handleTimeUpdate}
-              onEnded={() => {
-                dispatch(nextTrack());
-              }}/>
-
-            <div className={classes["music-control"]}>
-              <SongsNavigation audioRef={audio} />
-              <ProgressBar audioRef={audio} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} />
-            </div>
-
-            <SoundController audioRef={audio}></SoundController>
-          </>
-        }
-      </div>
+  return (
+    <div>
+      {currentTrack?.song && (
+        <div>
+          <h3>Now Playing: {currentTrack.song.name}</h3>
+          <audio ref={audioRef} src={currentTrack.song.audioUrl} controls autoPlay />
+        </div>
+      )}
+      <button onClick={toggleButton}>{currentTrack?.isPlaying ? "PLay" : "Pause"}</button>
+      <button onClick={handlePlayPrev}>Previous</button>
+      <button onClick={handlePlayNext}>Next</button>
     </div>
-  </>
+  );
 };
 
 export default MusicPlayer;

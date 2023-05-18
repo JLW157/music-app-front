@@ -1,7 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ISong } from "../../models/track-models";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setShowPlayer, pauseMusic, playMusic } from "../../store/features/playerSlice";
+import { pauseTrack, playCurrentTrack, setTrack } from "../../store/features/appSlice";
 
 interface ITrackItemProps {
     s: ISong;
@@ -9,22 +10,29 @@ interface ITrackItemProps {
 
 const TrackItem = ({ s }: ITrackItemProps) => {
     const [hovered, setHovered] = useState<boolean>(false);
-    const audioRef = useRef<HTMLAudioElement>(null);
-    const isPlayingRef = useRef<boolean>(false);
-    const player = useAppSelector(s => s.player);
+
+    const { player, app } = useAppSelector(s => s);
     const dispatch = useAppDispatch();
 
-    function toggleAudio() {
+    const handlePlayTrack = (trackId: string | undefined) => {
+        console.log(`Handling playing track, TrackId: ${trackId} |  app current id: ${app.currentTrack?.song?.id} | IsPlaying: ${app.currentTrack?.isPlaying}`);
         if (!player.showPlayer) {
             dispatch(setShowPlayer(true));
         }
-        if (player.isPlaying) {
-            dispatch(pauseMusic());
+
+        if (app.currentTrack?.isPlaying === false) {
+            console.log("In isPlaying false");
+            if (app.currentTrack?.song?.id === s.id) {
+                dispatch(playCurrentTrack());
+            } else {
+                dispatch(setTrack(trackId));
+            }
         }
         else {
-            dispatch(playMusic(s));
+            console.log("In isPlaying true");
+            dispatch(pauseTrack());
         }
-    }
+    };
 
 
 
@@ -40,14 +48,14 @@ const TrackItem = ({ s }: ITrackItemProps) => {
                         <div className="sound-item-img">
                             <img src={s.posterUrl} height="30" width="30" alt="" />
                         </div>
-                        <div className="sound-item-playbutton" onClick={toggleAudio}>
+                        <div className="sound-item-playbutton" onClick={() => handlePlayTrack(s.id)}>
                             <div className="circle-button">
                                 <div className="triangle-button"></div>
                             </div>
                         </div>
                     </div>
                     <div className="sound-item-number">
-                        <span>{100}</span>
+                        <span>{s.id}</span>
                     </div>
                     <div className="sound-item-content">
                         <a href="#!">{s.artists[0]}</a>
@@ -59,7 +67,7 @@ const TrackItem = ({ s }: ITrackItemProps) => {
                     </div>
                 </div>
             </div>
-            <audio ref={audioRef} src={s.audioUrl} autoPlay={false} />
+            {/* <audio ref={audioRef} src={s.audioUrl} autoPlay={false} /> */}
         </>
     );
 };

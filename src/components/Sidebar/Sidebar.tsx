@@ -22,7 +22,7 @@ const Sidebar = () => {
             name: "Search"
         },
         {
-            to: "playlists",
+            to: "/me/tracks",
             icon: faBook,
             name: "Your library"
         },

@@ -6,7 +6,7 @@ export interface IUploadTrackDTO{
 }
 
 export interface ISong{
-    id: string;
+    id: string | undefined;
     posterUrl: string;
     genre: string;
     artists: string[];

@@ -22,7 +22,7 @@ const SectionItem = ({song}: sectionItemProps) => {
             dispatch(playMusic(song));        
         }
     }
-    
+
     return <>
         <div className="card">
             <div className="card-image">

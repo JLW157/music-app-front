@@ -4,6 +4,7 @@ import audiosSlice from "./features/audiosSlice";
 import playerSlice from "./features/playerSlice";
 import popularSlice from "./features/popularSlice";
 import authSlice from "./features/authSlice";
+import appSlice from "./features/appSlice";
 
 const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
         popularSongs: popularSlice,
         player: playerSlice,
         auth: authSlice,
+        app: appSlice
     }
 });
 
