@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ISong } from "../../../../models/track-models";
 import { formatArtists } from "../../../../utils/displayHelpers";
 import classes from "../MusicPlayer.module.css";
@@ -9,7 +10,7 @@ const DisplayInfo = ({ song }: displayInfoProps) => {
         <img src={song.posterUrl} alt="Audio poster" />
       </div>
       <div className={classes["track-info"]}>
-        <h4 className={classes["song-name"]}>{song.name}</h4>
+        <Link to={`${song.artists[0]}/${song.name}`} className={classes["song-name"]}>{song.name}</Link>
         <span className={classes["aritsts"]}>
           {formatArtists(song.artists)}
         </span>

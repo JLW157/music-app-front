@@ -26,10 +26,10 @@ const responsive = {
 };
 
 const Section = ({ title }: sectionProps) => {
-    const songs = useAppSelector(state => state.player.songs);
+    const songs = useAppSelector(state => state.app.tracks);
 
-    let itemsToDisplay: any = songs?.map((song, index) => {
-        return <SectionItem key={song.id} song={song} />
+    let itemsToDisplay: any = songs?.map((s, index) => {
+        return <SectionItem key={s.song?.id} song={s.song} />
     });
 
     return <>

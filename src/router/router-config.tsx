@@ -15,9 +15,11 @@ import UploadTrackPage from "../components/Tracks/UploadTrack";
 import TracksLayout from "../components/Tracks/TracksLayout";
 import Authorized from "../components/Hocs/Authorized";
 import Profile from "../components/Profile/Profile";
-import ProfileLayout from "../components/Profile/ProfileLayout";
-import TrackList from "../components/Tracks/TrackList";
-import UserTracks from "../components/Tracks/UserTracks";
+import UserProfile from "../components/Profile/UserProfile/UserProfile";
+import UserProfileTracksPage from "../components/Profile/UserProfile/UserProfileTracksPage";
+import ProfileTracksPage from "../components/Profile/ProfileTracksPage";
+import TrackView from "../components/Tracks/TrackView/TrackView";
+import TrackViewPage from "../components/Tracks/TrackView/TrackViewPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -41,17 +43,18 @@ const router = createBrowserRouter(
             <Route path="register" element={<Register />}></Route>
 
             <Route path="me" element={<Profile />}>
-                <Route index element={<h2>Test</h2>}></Route>
-                <Route path="tracks" element={<UserTracks />} />
+                <Route index element={<Navigate to={"tracks"} />} />
+                <Route path="tracks" element={<ProfileTracksPage />} />
                 <Route path="sets" element={<h2>My Sets</h2>} />
             </Route>
 
-            {/*<Route path=":username/*" element={<UserProfile />} >
-                <Route path="sets" element={<UserSets />} />
+            <Route path=":username/:trackName" element={<TrackViewPage />} />
+            <Route path=":username" element={<UserProfile />} >
+                <Route path="tracks" element={<UserProfileTracksPage />} />
+                {/* <Route path="sets" element={<UserSets />} />
                 <Route path="sets/:nameOfSet" element={<SetDetail />} />
-                <Route path="tracks" element={<UserTracks />} />
-                <Route path="tracks/:nameofTrack" element={<TrackDetail />} />
-            </Route>*/}
+                <Route path="tracks/:nameofTrack" element={<TrackDetail />} /> */}
+            </Route>
 
             <Route path="*" element={<NotFoundPage />}></Route>
         </Route >

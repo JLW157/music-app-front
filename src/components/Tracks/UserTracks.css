@@ -1,0 +1,9 @@
+.track-list-wrapper {
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+}
+
+.track-list-title{
+    margin: 10px;
+}

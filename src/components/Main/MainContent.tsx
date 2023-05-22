@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { fetchSongs } from "../../store/features/playerSlice";
 import { useAppDispatch } from "../../store/store";
 import Section from "../Section/Section";
 import Container from "../UI/Container";
+import { fetchSongs } from "../../store/features/appSlice";
 
 const MainContent = () => {
     const dispatch = useAppDispatch();

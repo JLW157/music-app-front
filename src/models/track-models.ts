@@ -12,4 +12,5 @@ export interface ISong{
     artists: string[];
     name:string;
     audioUrl:string;
+    playedCount: number
 };

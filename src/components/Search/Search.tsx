@@ -2,7 +2,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import { ISong } from "../../data";
 import { IGenre } from "../../models/genres-models";
 import { getGenres } from "../../services/tracks-service";
 import { Options } from "react-select";
@@ -10,6 +9,8 @@ import { useForm, Controller } from "react-hook-form";
 import "./Search.css";
 import axios from "axios";
 import { searchAllAudiosEndpoint } from "../../utils/endpoints";
+import { ISong } from "../../models/track-models";
+import { Link } from "react-router-dom";
 
 interface ISearchRequest {
   term: string;
@@ -81,11 +82,24 @@ const SearchInput = () => {
                   placeholder="what are you looking for?"
                   minLength={3}
                   emptyLabel="No results found"
-                  renderMenuItemChildren={(option) => (
-                    <div key={(option as ISong).id}>
-                      {(option as ISong).name}
-                    </div>
-                  )}
+                  renderMenuItemChildren={(song) => {
+                    const newSong = song as ISong;
+                    return (
+                      <>
+                        <Link to={`/${newSong.artists[0]}/${newSong.name}`}>
+                          <div className="renderItem">
+                            <div className="renderItem-img">
+                              <img src={newSong.posterUrl} />
+                            </div>
+                            <div className="renderItem-content">
+                              {newSong.name}
+                            </div>
+                          </div>
+                        </Link>
+
+                      </>
+                    );
+                  }}
                   onChange={(selected) => {
                     console.log(selected);
                     // Handle selection of an autocomplete suggestion

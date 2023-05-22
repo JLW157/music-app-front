@@ -1,21 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getUserAudiosUrl } from "../../utils/endpoints";
+import { getUserAudiosUrl, trackCountSignalRUrl } from "../../utils/endpoints";
 import { ISong } from "../../models/track-models";
 import TrackList from "./TrackList";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { fetchUserSongs } from "../../store/features/playerSlice";
+import { fetchUserSongs } from "../../store/features/appSlice";
+import "./UserTracks.css";
+import { useDispatch } from "react-redux";
+import * as signalR from "@microsoft/signalr";
 
-const UserTracks = () => {
-    const dispatch = useAppDispatch();
-    const player = useAppSelector(state => state.player);
-    
-    useEffect(() => {
-        dispatch(fetchUserSongs());
-    }, [dispatch]);
+interface IUserTracks {
+    songs: ISong[];
+}
 
+const UserTracks = ({ songs }: IUserTracks) => {
     return <>
-        <TrackList songs={player.songs}></TrackList>
+        <div className="track-list-wrapper">
+            <TrackList songs={songs} />
+        </div>
     </>
 };
 

@@ -1,16 +1,10 @@
 .sound-item-row {
-    display: flex;
+    display: grid;
     align-items: center;
-    gap: 1rem;
-}
-
-.track-list-wrapper {
-    width: 100%;
-
-}
-
-.track-list-title{
-    margin: 10px;
+    /* gap: 1rem; */
+    grid-template-rows: 1fr;
+    /* grid-column: 1; */
+    grid-template-columns: auto 1fr minmax(auto, 5fr) 1fr;
 }
 
 .track-list {
@@ -49,7 +43,12 @@
     flex: 1;
 }
 
-.sound-item-additional {}
+.sound-item-additional {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
 .sound-item-playcount {}
 

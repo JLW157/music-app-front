@@ -3,7 +3,7 @@ import Profile from "./Profile";
 
 const ProfileLayout = () => {
     return <>
-        <Profile></Profile>
+        <Profile />
         <Outlet />
     </>
 };

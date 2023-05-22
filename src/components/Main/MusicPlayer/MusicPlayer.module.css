@@ -24,6 +24,12 @@
 .song-name {
     text-transform: uppercase;
     font-weight: 600;
+    display: block;
+}
+
+.song-name:hover,
+.song-name:active {
+    text-decoration: underline;
 }
 
 .music-control {
@@ -40,7 +46,6 @@
 }
 
 .aritsts a:hover,
-.aritsts a:focus,
 .aritsts a:active {
     text-decoration: underline;
 }
