@@ -7,12 +7,10 @@ import { ISong } from "../../models/track-models";
 
 interface ITrackCountProps {
     className?: string;
-    track: ISong;    
+    track: ISong;
 }
 
 const TrackCount = ({ track, className }: ITrackCountProps) => {
-    const dispatch = useAppDispatch();
-    console.log("Track count - ", track.playedCount);
     return <>
         <span className={className ?? ""}>{track.playedCount}</span>
     </>

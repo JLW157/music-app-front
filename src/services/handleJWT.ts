@@ -1,9 +1,9 @@
-import { authenticationResponse } from "../models/auth-models";
+import { IAuthenticatedUserResponse } from "../models/auth.models";
 
 const tokenKey = "token";
 const expirationKey = "token-expiration";
 
-export function saveToken(authData: authenticationResponse){
+export function saveToken(authData: IAuthenticatedUserResponse){
     localStorage.setItem(tokenKey, authData.token);
     localStorage.setItem(expirationKey, authData.expiration.toString());
 };

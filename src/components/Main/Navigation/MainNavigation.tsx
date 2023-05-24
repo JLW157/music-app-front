@@ -11,7 +11,6 @@ import { useState } from 'react';
 
 const MainNavigation = () => {
   const { isLoggedIn, userInfo } = useAppSelector(state => state.auth);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
@@ -31,7 +30,7 @@ const MainNavigation = () => {
           ? <>
             <ul>
               <li>
-                <ProfileIcon isProfileOpen={isProfileOpen} profileToggler={() => setIsProfileOpen(!isProfileOpen)}/>
+                <ProfileIcon isProfileOpen={isProfileOpen} profileToggler={() => setIsProfileOpen(!isProfileOpen)} />
               </li>
               {isProfileOpen && <>
                 <ProfileSubMenu emailToDisplay={userInfo?.email} />
