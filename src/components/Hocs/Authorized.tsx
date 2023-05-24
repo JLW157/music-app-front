@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { IRole } from "../../models/auth-models";
 import { useAppSelector } from "../../store/store";
 import { Navigate } from "react-router-dom";
+import { IRole } from "../../models/auth.models";
 
 export interface AuthorizedProps {
     requiredRole?: IRole,

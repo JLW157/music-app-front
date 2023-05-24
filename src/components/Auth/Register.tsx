@@ -1,12 +1,12 @@
 import { SubmitHandler, UseFormRegisterReturn, useForm } from "react-hook-form";
-import "./Login.css";
-import { registerCredentionals } from "../../models/auth-models";
+import styles from "./Login.module.css";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/store";
 import { google, registerAsync } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { CredentialResponse, GoogleOAuthProvider } from "@react-oauth/google";
 import Google from "./Google";
+import { registerCredentionals } from "../../models/auth.models";
 
 const Register = () => {
     const { register,
@@ -57,19 +57,19 @@ const Register = () => {
 
 
     return <>
-        <div className="form-card">
-            <div className="form-row">
-                <div className="form-img-wrapper">
-                    <div className="form-image">
+        <div className={styles["form-card"]}>
+            <div className={styles["form-row"]}>
+                <div className={styles["form-img-wrapper"]}>
+                    <div className={styles["form-image"]}>
                         <img src="./img/logo-no-background.png" alt="" />
                     </div>
                 </div>
-                <div className="form-wrapper">
-                    <div className="form">
-                        <h3 className="form-title">Register form</h3>
+                <div className={styles["form-wrapper"]}>
+                    <div className={styles["form"]}>
+                        <h3 className={styles["form-title"]}>Register form</h3>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <div className="form-control">
-                                <div className="input-box">
+                            <div className={styles["form-control"]}>
+                                <div className={styles["input-box"]}>
                                     <input {...register('email', {
                                         required: "Email is required!",
                                         pattern: {
@@ -82,8 +82,8 @@ const Register = () => {
                                 {errors?.email && <div style={{ color: "red" }}>{errors.email.message}</div>}
                             </div>
 
-                            <div className="form-control">
-                                <div className="input-box">
+                            <div className={styles["form-control"]}>
+                                <div className={styles["input-box"]}>
                                     <input {...register('username', {
                                         required: "Username is required!",
                                     })} type="text" required />
