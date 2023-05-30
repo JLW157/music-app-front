@@ -26,6 +26,5 @@ export const searchAllAudiosEndpoint = `${baseUrl}/api/search/audios`;
 
 export const getUserProfileInfo = `${baseUrl}/api/profile`;
 
-
 // trackCountUrl 
 export const trackCountSignalRUrl = `${baseUrl}/trackCount`;

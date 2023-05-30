@@ -29,6 +29,7 @@ const SearchInput = () => {
     getGenres().then((res) => {
       setGenres(res);
     });
+
   }, []);
 
   const handleSearch = (query: string) => {
