@@ -14,8 +14,6 @@ const RootLayout = () => {
 
     useEffect(() => {
         if (connection) {
-            console.log("Event registered");
-
             connection.on("IncrementTrackCount", (audioCount: number, audioId: string) => {
                 console.log("Setting the new count ", audioCount, audioId);
                 dispatch(setNewCountForTrack({ idTrack: audioId, newCount: audioCount }));
