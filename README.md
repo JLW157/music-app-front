@@ -19,4 +19,4 @@ Search:
 Lab 4:
 Vika Myron
 Small refactor of components 
-https://github.com/JLW157/music-app-front/pull/1
+https://github.com/JLW157/music-app-front/pull/2
