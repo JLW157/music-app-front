@@ -2,11 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBook, faHome, faPlusSquare, faHeart, faBars, faUpload } from '@fortawesome/free-solid-svg-icons';
 import classes from "./Sidebar.module.css";
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../store/store';
 
 const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(true);
+    const [isOpen, setIsOpen] = useState<boolean>(window.innerWidth > 990 ? true : false);
     const toggle = () => setIsOpen(!isOpen);
     const { isLoggedIn } = useAppSelector(x => x.auth);
 
@@ -53,11 +53,11 @@ const Sidebar = () => {
             <div className={classes.navigation}>
                 <ul>
                     <li>
-                        <Link to={"playlists/create"}>
+                        <Link to={"sets/create"}>
                             <FontAwesomeIcon icon={faPlusSquare}></FontAwesomeIcon>
                             <span style={{ display: isOpen ? "inline-block" : "none" }}>Create Playlist</span>
                         </Link>
-                    </li>
+                </li>
                     <li>
                         <Link to={"liked"}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
