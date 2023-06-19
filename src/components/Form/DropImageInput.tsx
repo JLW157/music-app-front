@@ -68,7 +68,7 @@ const DropImageInput = ({ control, name, rules }: DropFileInputProps) => {
                     </>
                 ) : (
                     <>
-                        <div className={classes["upload-image-wrapper"]}>
+                        <div style={{width: "100px", height: "100px"}} className={classes["upload-image-wrapper"]}>
                             <img className={classes["upload-image__preview"]} src={URL.createObjectURL(field.value)} alt="Uploaded" />
                         </div>
                     </>

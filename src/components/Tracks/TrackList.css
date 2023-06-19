@@ -24,6 +24,11 @@
 
 .sound {
     padding: 5px;
+    border: 1px solid #000;
+}
+
+.sound:hover{
+    border: 1px solid #fff;
 }
 
 .sound-item-img-wrapper {

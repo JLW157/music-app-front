@@ -11,6 +11,7 @@ function App() {
   const dispatch = useAppDispatch();
   const { connection, isConnected } = useAppSelector(state => state.signalR);
 
+  
   useEffect(() => {
     console.log("App re-render");
     dispatch(handleAuth());

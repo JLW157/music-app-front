@@ -2,8 +2,8 @@ import { createBrowserRouter, createRoutesFromElements, Route, Navigate, RouterP
 import Liked from "../components/Liked/Liked";
 import MainContent from "../components/Main/MainContent";
 import CreatePlaylist from "../components/Playlists/CreatePlaylist";
-import Playlists from "../components/Playlists/Playlists";
-import Search from "../components/Search/Search";
+import UserPlaylistsPage from "../components/Playlists/UserPlaylistsPage";
+import Search from "../components/Search/SearchInput";
 import SectionPage from "../components/SectionPage/SectionPage";
 import PlaylistLayout from "../components/UI/PlaylistsLayout";
 import RootLayout from "../components/UI/RootLayout";
@@ -20,6 +20,9 @@ import UserProfileTracksPage from "../components/Profile/UserProfile/UserProfile
 import ProfileTracksPage from "../components/Profile/ProfileTracksPage";
 import TrackView from "../components/Tracks/TrackView/TrackView";
 import TrackViewPage from "../components/Tracks/TrackView/TrackViewPage";
+import SearchPage from "../components/Search/SearchPage";
+import SearchPageWrapper from "../components/Search/SearchPageWrapper";
+import SetPage from "../components/Playlists/SetPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,11 +30,19 @@ const router = createBrowserRouter(
             <Route index element={<Navigate to='home' />} />
             <Route path="home" element={<MainContent />} />
             <Route path="emailsent/:email" element={<EmailSent />} />
-            <Route path='search' element={<Search />} />
-            <Route path='playlists' element={<PlaylistLayout />}>
-                <Route index element={<Playlists />} />
+
+            <Route path="search" element={<SearchPageWrapper />}>
+                <Route path="all" element={<Search />}></Route>
+                <Route path="tracks"></Route>
+                <Route path="people"></Route>
+            </Route>
+
+            {/* <Route path='search' element={<SearchPage />} /> */}
+            <Route path='sets' element={<Authorized authorized={<PlaylistLayout />} />}>
+                <Route index element={<UserPlaylistsPage />} />
                 <Route path='create' element={<CreatePlaylist />} />
             </Route>
+
             <Route path="tracks" element={<TracksLayout />}>
                 <Route index element={<Navigate to={"/"} />}></Route>
                 <Route path="upload" element={<Authorized authorized={<UploadTrackPage />} nonAuthorized={<Navigate to={"/login"} />}></Authorized>} />
@@ -42,7 +53,7 @@ const router = createBrowserRouter(
             <Route path="login/:email?" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
 
-            <Route path="me" element={<Profile />}>
+            <Route path="me" element={<Authorized authorized={<Profile />} />}>
                 <Route index element={<Navigate to={"tracks"} />} />
                 <Route path="tracks" element={<ProfileTracksPage />} />
                 <Route path="sets" element={<h2>My Sets</h2>} />
@@ -51,11 +62,12 @@ const router = createBrowserRouter(
             <Route path=":username/:trackName" element={<TrackViewPage />} />
             <Route path=":username" element={<UserProfile />} >
                 <Route path="tracks" element={<UserProfileTracksPage />} />
+                <Route path="sets" element={<UserPlaylistsPage />}></Route>
                 {/* <Route path="sets" element={<UserSets />} />
                 <Route path="sets/:nameOfSet" element={<SetDetail />} />
                 <Route path="tracks/:nameofTrack" element={<TrackDetail />} /> */}
             </Route>
-
+            <Route path="sets/:nameOfSet" element={<SetPage />} />
             <Route path="*" element={<NotFoundPage />}></Route>
         </Route >
     ));

@@ -92,6 +92,10 @@
     flex-direction: column;
 }
 
+.form-upload-image{
+    margin-right: 2rem;
+}
+
 .select-box{
     position: relative;
     width: 20em;

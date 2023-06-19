@@ -1,0 +1,9 @@
+.search-page-main{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.searchResults{
+    display: flex;
+    flex-direction: column;
+}

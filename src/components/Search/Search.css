@@ -1,68 +1,217 @@
-.search-input{
-    max-width: 600px;
-    height: 50px;
-    background-color: #fff;
-    display: flex;
+.search-wrapper {
+  background-color: orange;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
 }
 
-.search-input input{
-    flex: 1;
-    border: none;
-    outline: none;
+.searchResults-options-panel {
+  height: 100%;
+  min-width: 150px;
+  padding: 20px;
 }
 
-.search-input button{
-    background-color: tomato;
-    padding: 10px;
-    border: none;
-    outline: none;
-    color: #fff;
-    cursor: pointer;
+.searchResults-list {
+  padding: 20px;
 }
 
-.search-input svg{
-    align-self: center;
-    padding: 10px;
-}
-.select-box{
-    position: relative;
-    width: 40%;
-    height: 100%;
+.search-result-options-content {}
+
+.search-input {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 }
 
-.select-box select{
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+.options-content-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.options-content-list-item {
+  height: 30px;
+}
+
+.tab-button {
+  text-align: left;
+  padding-left: 10px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  height: 100%;
+  background-color: cornflowerblue;
+  width: 100%;
+}
+
+.options-content-list-item.active .tab-button {
+  background-color: orange;
+}
+
+.search-submit-button {
+  background-color: orange;
+}
+
+.search-input input.rbt-input-main.form-control.rbt-input {
+  width: 100%;
+}
+
+.search-wrapper-form {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.search-input-buttons {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+/* Render item styles */
+.renderItem {
+  background-color: rgb(53, 53, 53);
+  border: 1px solid white;
+  max-height: 5rem;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  place-items: center;
+  overflow: hidden;
+}
+
+.renderMenuItems {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.renderItem-img {
+  width: 48px;
+  height: 48px;
+}
+
+.renderItem-img img {
+  object-fit: contain;
+  height: inherit;
+  width: inherit;
+  font-size: 10px;
+}
+
+.renderItem-content {
+  font-size: 10px;
+}
+
+.renderItem-content>* {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 880px) {
+  .search-wrapper {
+    width: 200px;
+    height: 35px;
+  }
+
+  .renderItem {
+    max-height: 40px;
+  }
+
+  .renderItem-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .searchResults-list {
+    /* Add responsive styles for smaller screens here */
+    font-size: 10px;
+  }
+}
+
+.search-page-loader-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* not found search page */
+.not-found-search-results {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-search-header {
+  text-align: center;
+}
+
+.not-found-search-header-icon {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
+}
+
+.not-found-search-header-icon>* {
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%;
+  }
+
+  .col-2 {
+    width: 16.66%;
+  }
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-5 {
+    width: 41.66%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-7 {
+    width: 58.33%;
+  }
+
+  .col-8 {
+    width: 66.66%;
+  }
+
+  .col-9 {
+    width: 75%;
+  }
+
+  .col-10 {
+    width: 83.33%;
+  }
+
+  .col-11 {
+    width: 91.66%;
+  }
+
+  .col-12 {
     width: 100%;
-    border: 1px solid #ffffff;
-    background: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    outline: none;
-    font-size: 16px;
-    color: #000;
-    font-weight: 300;
-}
-
-.select-box option{
-    color: #000;
-}
-
-.search-wrapper{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding: 0px 10px;
-}
-
-.search-input{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.search-input input{
-    height: 100%;
+  }
 }

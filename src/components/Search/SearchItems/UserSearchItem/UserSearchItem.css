@@ -1,0 +1,33 @@
+.artist-list-item{
+    height: 100px;
+    width: 100%;
+}
+
+.artist-item{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100px 3fr;
+    align-items: center;
+}
+
+.artist-item-img {
+    height: 100px;
+    max-width: 100px;
+}
+
+.artist-item-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.artist-item-content{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.aritst-item-link{
+    height: inherit;
+    width: inherit;
+}

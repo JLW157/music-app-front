@@ -69,6 +69,9 @@ const appSlice = createSlice({
                 state.currentTrack = state.tracks.find((track) => track.song?.id === action.payload) || undefined;
             }
         },
+        setTracks: (state, action: PayloadAction<ITrack[]>) => {
+            state.tracks = action.payload;
+        },
         playCurrentTrack: (state) => {
             state.currentTrack!.isPlaying = true;
         },
@@ -116,6 +119,6 @@ const appSlice = createSlice({
     },
 });
 
-export const { setCurrentTrack, setNewCountForTrack, playCurrentTrack, pauseTrack, playNextTrack, playPrevTrack } = appSlice.actions;
+export const { setTracks, setCurrentTrack, setNewCountForTrack, playCurrentTrack, pauseTrack, playNextTrack, playPrevTrack } = appSlice.actions;
 
 export default appSlice.reducer;

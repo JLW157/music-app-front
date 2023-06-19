@@ -83,7 +83,7 @@ const UploadTrackPage = () => {
                 {errors.track && <p>{errors.track.message}</p>}
               </>}
             {page === 2 &&
-              <>
+            <>
                 <div className={classes["form-upload-basic-info"]}>
                   <div className={classes["form-upload-image"]}>
                     <DropImageInput

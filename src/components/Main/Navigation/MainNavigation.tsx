@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ProfileSubMenu } from './Profile/ProfileSubmenu/ProfileSubMenu';
 import ProfileIcon from './Profile/ProfileIcon';
 import { useState } from 'react';
+import SearchInput from '../../Search/SearchInput';
 
 const MainNavigation = () => {
   const { isLoggedIn, userInfo } = useAppSelector(state => state.auth);
@@ -24,6 +25,8 @@ const MainNavigation = () => {
           <FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon>
         </button>
       </div>
+
+      <SearchInput />
 
       <div className={classes.navbar}>
         {isLoggedIn
