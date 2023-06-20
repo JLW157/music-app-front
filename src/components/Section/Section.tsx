@@ -3,6 +3,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { useAppSelector } from '../../store/store';
 import SectionItem from '../SectionItem/SectionItem';
 import "./Section.css"
+import { ISong } from '../../models/track-models';
 
 const responsive = {
     desktop: {
@@ -25,11 +26,11 @@ const responsive = {
     },
 };
 
-const Section = ({ title }: sectionProps) => {
-    const songs = useAppSelector(state => state.app.tracks);
+const Section = ({ title, songs }: sectionProps) => {
+    // const songs = useAppSelector(state => state.app.tracks);
 
     let itemsToDisplay: any = songs?.map((s, index) => {
-        return <SectionItem key={s.song?.id} song={s.song} />
+        return <SectionItem key={s.id} song={s} />
     });
 
     return <>
@@ -41,17 +42,17 @@ const Section = ({ title }: sectionProps) => {
 
             {itemsToDisplay ? <Carousel containerClass='react-multi-carousel-list' centerMode={true} responsive={responsive}>
                 {itemsToDisplay && itemsToDisplay}
-            </Carousel> : <div style={{textAlign: "center", padding: "10px"}}>
-                    There is no audios to display.
-                </div>}
-            
+            </Carousel> : <div style={{ textAlign: "center", padding: "10px" }}>
+                There is no audios to display.
+            </div>}
+
         </div>
     </>
 };
 
 interface sectionProps {
     title: string;
-    // songs: ISong[],
+    songs: ISong[],
 
 };
 

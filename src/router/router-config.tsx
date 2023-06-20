@@ -23,6 +23,7 @@ import TrackViewPage from "../components/Tracks/TrackView/TrackViewPage";
 import SearchPage from "../components/Search/SearchPage";
 import SearchPageWrapper from "../components/Search/SearchPageWrapper";
 import SetPage from "../components/Playlists/SetPage";
+import UserProfileSetsPage from "../components/Profile/UserProfile/UserProfileSetsPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -56,13 +57,14 @@ const router = createBrowserRouter(
             <Route path="me" element={<Authorized authorized={<Profile />} />}>
                 <Route index element={<Navigate to={"tracks"} />} />
                 <Route path="tracks" element={<ProfileTracksPage />} />
-                <Route path="sets" element={<h2>My Sets</h2>} />
+                <Route path="sets" element={<UserProfileSetsPage />} />
             </Route>
 
             <Route path=":username/:trackName" element={<TrackViewPage />} />
             <Route path=":username" element={<UserProfile />} >
+                <Route index element={<Navigate to={"tracks"} />} />
                 <Route path="tracks" element={<UserProfileTracksPage />} />
-                <Route path="sets" element={<UserPlaylistsPage />}></Route>
+                <Route path="sets" element={<UserPlaylistsPage />} />
                 {/* <Route path="sets" element={<UserSets />} />
                 <Route path="sets/:nameOfSet" element={<SetDetail />} />
                 <Route path="tracks/:nameofTrack" element={<TrackDetail />} /> */}

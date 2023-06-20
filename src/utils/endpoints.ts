@@ -1,5 +1,5 @@
 // const baseUrlLocal: string = "https://localhost:7143";
-const baseUrl: string = "https://localhost:7143";
+const baseUrl: string = "https://music-app-api.azurewebsites.net";
 
 export const popularAudioUrl = `${baseUrl}/api/audio/popular`;
 export const audiosUrl = `${baseUrl}/api/audio`;
@@ -37,3 +37,11 @@ export const getUserSetsUrl = `${baseUrl}/api/Sets`;
 export const addAudioToSetUrl = `${baseUrl}/api/Sets/addAudio`;
 export const removeAudioFromSetUrl =  `${baseUrl}/api/Sets/removeAudio`;
 export const getSetsByUsername = `${baseUrl}/api/Sets/getSetsByUsername`;
+
+export const getAudiosSetsUrl = `${baseUrl}/api/Sets/getAudiosForSet`;
+
+export const getSetsForProfileUser = `${baseUrl}/api/Sets/getSetsForProfileUser`;
+
+// Sections
+export const getPopularSongs = `${baseUrl}/api/audio/getPopularSongs`;
+export const getNewlyListedSongs = `${baseUrl}/api/audio/getNewlyListedSongs`;

@@ -12,6 +12,7 @@ const UserPlaylistsPage = () => {
     const [sets, setSets] = useState<Array<ISetDTO>>([]);
     const [found, setFound] = useState<boolean>();
     const [loading, setIsLoading] = useState<boolean>(true);
+    
     useEffect(() => {
         setIsLoading(true);
         axios.get<Array<ISetDTO>>(`${getSetsByUsername}?username=${username}`).then(
@@ -28,13 +29,21 @@ const UserPlaylistsPage = () => {
             }
         );
     }, []);
+
     return <>
         {loading ? <>
             <Loader height={40} width={40} />
         </>
             :
             <>
-                <SetsList songs={sets}/>
+                {sets.length < 1 ?
+                    <>
+                        <h3>Sets not found!</h3>
+                    </>
+                    :
+                    <>
+                        <SetsList sets={sets} />
+                    </>}
             </>
         }
     </>

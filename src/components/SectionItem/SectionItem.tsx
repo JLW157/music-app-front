@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import "./SectionItem.css";
 import { formatArtists } from "../../utils/displayHelpers";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -44,8 +44,8 @@ const SectionItem = ({ song }: sectionItemProps) => {
             </div>
             <div className="play-icon" onClick={() => { handlePlayTrack(song?.id) }}>
                 <div className="circle">
-                    {(player.showPlayer && currentTrack?.song?.id === song?.id) && <div>P</div>}
-                    <div className="triangle"></div>
+                    {(player.showPlayer && currentTrack?.song?.id === song?.id) ? <FontAwesomeIcon icon={faPause}></FontAwesomeIcon>
+                    : <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>}
                 </div>
             </div>
             <div className="like-icon">

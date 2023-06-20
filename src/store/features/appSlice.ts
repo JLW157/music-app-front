@@ -5,7 +5,7 @@ import axios from "axios";
 import { audiosUrl, getUserAudiosUrl, getUserAudisByUsernameUrl } from "../../utils/endpoints";
 import { ISong } from "../../models/track-models";
 
-interface ITrack {
+export interface ITrack {
     song: ISong;
     isPlaying: boolean;
 }

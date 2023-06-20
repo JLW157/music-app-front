@@ -14,7 +14,7 @@ interface ISetListItemProps {
 const SetListItem = ({ s }: ISetListItemProps) => {
     return (
         <>
-            <Link to={"/"}>
+            <Link to={`/sets/${s.name}`}>
                 <div className={styles["sound"]}>
                     <div className={styles["sound-item-row"]}>
                         <div
