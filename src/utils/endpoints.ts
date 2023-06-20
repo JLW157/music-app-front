@@ -43,5 +43,5 @@ export const getAudiosSetsUrl = `${baseUrl}/api/Sets/getAudiosForSet`;
 export const getSetsForProfileUser = `${baseUrl}/api/Sets/getSetsForProfileUser`;
 
 // Sections
-export const getPopularSongs = `${baseUrl}/api/audio/getPopularSongs`;
-export const getNewlyListedSongs = `${baseUrl}/api/audio/getNewlyListedSongs`;
+export const getPopularSongs = `${baseUrl}/api/audios/getPopularSongs`;
+export const getNewlyListedSongs = `${baseUrl}/api/audios/getNewlyListedSongs`;
