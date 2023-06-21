@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Section from "./Section";
 import axios from "axios";
-import { getNewlyListedSongs, getPopularSongs } from "../../utils/endpoints";
+import { getPopularSongs } from "../../utils/endpoints";
 import { ISong } from "../../models/track-models";
 
 const PopularSection = () => {
@@ -11,7 +11,7 @@ const PopularSection = () => {
         axios.get<Array<ISong>>(getPopularSongs).then(res => {
             setSongs(res.data);
         }, rej => {
-
+            
         });    
     }, []);
     
